@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
-[ext_resource path="res://station/Mine.tscn" type="PackedScene" id=2]
+[ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
+[ext_resource path="res://connection/Connection.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Map.gd" type="Script" id=4]
 
 [node name="Game" type="Node2D"]
@@ -43,14 +44,22 @@ __meta__ = {
 [node name="Mine" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 94.3333, 184.667 )
 
-[node name="Rail" type="Line2D" parent="Map"]
-position = Vector2( -820.283, 76.4114 )
-points = PoolVector2Array( 968.437, 133.763, 915.283, 108.589 )
-width = 1.0
-default_color = Color( 0, 0, 0, 1 )
+[node name="Rail" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 968.437, 133.763, 925.283, 120.589, 915.283, 108.589 )
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 148, 210.667 )
+
+[node name="Rail1" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 925.283, 164.922, 929.95, 143.589, 968.283, 133.922 )
+stationB = NodePath("../Farm")
+
+[node name="Farm" parent="Map" instance=ExtResource( 2 )]
+position = Vector2( 105.333, 240.667 )
+
+[node name="Rail2" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 925.283, 164.922, 897.616, 140.255, 914.283, 107.589 )
+stationA = NodePath("../Farm")
 
 [node name="Panel" type="Panel" parent="."]
 margin_right = 72.0
@@ -68,6 +77,7 @@ text = "Train 1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="selected" from="Map/Mine" to="Map" method="_on_Mine_selected"]
-[connection signal="selected" from="Map/Town" to="Map" method="_on_Mine_selected"]
+[connection signal="selected" from="Map/Mine" to="Map" method="_on_station_selected"]
+[connection signal="selected" from="Map/Town" to="Map" method="_on_station_selected"]
+[connection signal="selected" from="Map/Farm" to="Map" method="_on_station_selected"]
 [connection signal="pressed" from="Panel/Train 1" to="." method="_on_train_pressed"]
