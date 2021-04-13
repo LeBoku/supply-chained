@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
-[ext_resource path="res://connection/Connection.tscn" type="PackedScene" id=3]
+[ext_resource path="res://connection/ConnectionHelper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Map.gd" type="Script" id=4]
 
 [node name="Game" type="Node2D"]
@@ -41,24 +41,36 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Rail4" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 163.333, 183.333, 148.667, 211.333 )
+stationA = NodePath("../Mine2")
+stationB = NodePath("../Town")
+
 [node name="Mine" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 94.3333, 184.667 )
 
+[node name="Rail3" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 94, 184.666 )
+stationA = NodePath("../Mine2")
+
+[node name="Mine2" parent="Map" instance=ExtResource( 2 )]
+position = Vector2( 149.667, 158.667 )
+
 [node name="Rail" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 968.437, 133.763, 925.283, 120.589, 915.283, 108.589 )
+points = PoolVector2Array( 149.333, 211, 127, 188, 94, 184.666 )
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 148, 210.667 )
 
 [node name="Rail1" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 925.283, 164.922, 929.95, 143.589, 968.283, 133.922 )
+points = PoolVector2Array( 148.333, 211, 142.667, 229, 114, 223.333, 104.667, 239 )
 stationB = NodePath("../Farm")
 
 [node name="Farm" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 105.333, 240.667 )
 
 [node name="Rail2" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 925.283, 164.922, 897.616, 140.255, 914.283, 107.589 )
+points = PoolVector2Array( 104.667, 239.666, 85.3333, 218.333, 116, 212.333, 90, 199.666, 92.6667, 184.666 )
 stationA = NodePath("../Farm")
 
 [node name="Panel" type="Panel" parent="."]
@@ -77,7 +89,4 @@ text = "Train 1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="selected" from="Map/Mine" to="Map" method="_on_station_selected"]
-[connection signal="selected" from="Map/Town" to="Map" method="_on_station_selected"]
-[connection signal="selected" from="Map/Farm" to="Map" method="_on_station_selected"]
 [connection signal="pressed" from="Panel/Train 1" to="." method="_on_train_pressed"]

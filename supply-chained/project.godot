@@ -9,18 +9,12 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Line2D",
-"class": "Connection",
-"language": "GDScript",
-"path": "res://Route.gd"
-}, {
 "base": "Sprite",
 "class": "Station",
 "language": "GDScript",
-"path": "res://Station.gd"
+"path": "res://station/Station.gd"
 } ]
 _global_script_class_icons={
-"Connection": "",
 "Station": ""
 }
 

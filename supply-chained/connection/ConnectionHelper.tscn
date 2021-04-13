@@ -1,12 +1,10 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Route.gd" type="Script" id=1]
+[ext_resource path="res://connection/ConnectionHelper.gd" type="Script" id=1]
 
 [node name="Connection" type="Line2D" groups=[
 "Route",
 ]]
-position = Vector2( -820.283, 76.4114 )
-points = PoolVector2Array( 968.437, 133.763, 915.283, 108.589 )
 width = 1.0
 default_color = Color( 0, 0, 0, 1 )
 script = ExtResource( 1 )
