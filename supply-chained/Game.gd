@@ -1,5 +1,7 @@
 extends Node2D
 
+const Route = preload("res://Route/Route.tscn");
+
 func _on_train_pressed():
 	enable_stations(true)
 	var station = null
@@ -11,10 +13,11 @@ func _on_train_pressed():
 			enable_stations(true, station.get_connected_stations())
 
 		station = yield($Map, "station_selected") as Station
-
 		enable_stations(false)
 
-	print(steps)
+	var route = Route.instance().init(steps)
+	add_child(route)
+	route.start()
 
 func enable_stations(enabled:bool, stations=get_tree().get_nodes_in_group('Station')):
 	for s in stations:

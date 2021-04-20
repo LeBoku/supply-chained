@@ -19,6 +19,11 @@ func get_connected_stations():
 		stations.append(conn["station"])
 		
 	return stations
+	
+func get_connection_to(station:Station):
+	for conn in out_connections:
+		if conn["station"] == station:
+			return conn
 
 func _on_pressed():
 	emit_signal("selected", self)
