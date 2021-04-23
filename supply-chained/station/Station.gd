@@ -1,17 +1,19 @@
-extends Sprite
+extends Position2D
 class_name Station
 
 signal selected(Station)
 
+export var available_resources = PoolStringArray()
+
 var out_connections = []
 
 func _ready():
-	$Tween.interpolate_property(self, "scale:x", 0.2, 0.3, .3)
-	$Tween.interpolate_property(self, "scale:y", 0.2, 0.3, .3)
+	$Visual/Tween.interpolate_property($Visual, "scale:x", 0.2, 0.3, .3)
+	$Visual/Tween.interpolate_property($Visual, "scale:y", 0.2, 0.3, .3)
 
 func set_enabled(enabled):
 	$Button.disabled = !enabled
-	$Tween.set_active(enabled)
+	$Visual/Tween.set_active(enabled)
 	
 func get_connected_stations():
 	var stations = []

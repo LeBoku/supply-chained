@@ -14,17 +14,9 @@ func _on_train_pressed():
 
 		station = yield($Map, "station_selected") as Station
 		enable_stations(false)
-
-	var train = Polygon2D.new()
-	train.polygon = PoolVector2Array([
-		Vector2(-6,-3), Vector2(6,-3),
-		Vector2(6,3), Vector2(-6,3)
-	])
 	
-	train.position = steps[0].position
-	add_child(train)
-
-	var route = Route.instance().init(steps, train)
+	$Train1.visible = true
+	var route = Route.instance().init(steps, $Train1)
 	add_child(route)
 	route.start()
 

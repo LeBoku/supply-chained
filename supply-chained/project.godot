@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Sprite",
+"base": "Position2D",
 "class": "Station",
 "language": "GDScript",
 "path": "res://station/Station.gd"
