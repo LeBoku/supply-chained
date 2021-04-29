@@ -1,6 +1,6 @@
 extends Node2D
 
-const RouteSegment = preload("res://Route/RouteSegment.tscn")
+const RouteSegment = preload("res://router/RouteSegment.tscn")
 
 var stations: Array
 var carrier: Node2D

@@ -24,6 +24,10 @@ config/name="supply-chained"
 run/main_scene="res://Game.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+RouteBuilder="*res://route-builder/RouteBuilder.gd"
+
 [rendering]
 
 environment/default_clear_color=Color( 0.396078, 0.878431, 0.929412, 1 )
