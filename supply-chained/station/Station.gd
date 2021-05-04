@@ -6,6 +6,8 @@ signal selected(Station)
 export var available_resources = PoolStringArray()
 export var pickup_station_count = 2
 
+var pickup_contents = {}
+
 var out_connections = []
 
 func _ready():
@@ -20,6 +22,19 @@ func set_enabled(enabled):
 	
 	if !enabled:
 		$PickupPoints.visible = false
+	
+func pickup(id: String):
+	yield(get_tree().create_timer(2), "timeout")
+	return pickup_contents[id]
+
+func dropoff(id: String, content: String):
+	var wait_time = 0.2
+
+	if pickup_contents[id] == null:
+		pickup_contents[id] = content
+		wait_time = 2
+
+	yield(get_tree().create_timer(wait_time), "timeout")
 	
 func show_pickup_panel():
 	$PickupPoints.visible = true
@@ -39,6 +54,11 @@ func get_connection_to(station:Station):
 func _on_pressed():
 	emit_signal("selected", self)
 
+func _on_pickup_point_pressed(event: InputEventMouseButton, id: String):
+	if event is InputEventMouseButton and (event.button_index == BUTTON_LEFT or event.button_index == BUTTON_RIGHT):
+		var pickup = event.button_index == BUTTON_LEFT
+		get_node('/root/RouteBuilder').add_pickup(id, pickup)
+
 func set_pickup_stations(count: int):
 	for child in $PickupPoints.get_children():
 		$PickupPoints.remove_child(child)
@@ -47,6 +67,12 @@ func set_pickup_stations(count: int):
 
 	for i in range(count):
 		var button = Button.new()
-		button.text = str(i + 1)
+		var id = str(i + 1)
+		button.text = id
 		
 		$PickupPoints.add_child(button)
+
+		if not pickup_contents.has(id):
+			pickup_contents[id] = null
+
+		button.connect("gui_input", self, "_on_pickup_point_pressed", [id])
