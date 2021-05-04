@@ -27,4 +27,12 @@ texture = ExtResource( 2 )
 [node name="Tween" type="Tween" parent="Visual"]
 repeat = true
 playback/repeat = true
+
+[node name="PickupPoints" type="GridContainer" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Button" to="." method="_on_pressed"]
