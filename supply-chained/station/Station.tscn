@@ -30,8 +30,8 @@ playback/repeat = true
 
 [node name="PickupPoints" type="GridContainer" parent="."]
 visible = false
-margin_right = 40.0
-margin_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
