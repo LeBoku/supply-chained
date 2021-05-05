@@ -1,6 +1,8 @@
 extends Position2D
 class_name Station
 
+const Util = preload("res://util/Util.gd")
+
 signal selected(Station)
 
 export var available_resources = PoolStringArray()
@@ -60,9 +62,7 @@ func _on_pickup_point_pressed(event: InputEventMouseButton, id: String):
 		get_node('/root/RouteBuilder').add_pickup(id, pickup)
 
 func set_pickup_stations(count: int):
-	for child in $PickupPoints.get_children():
-		$PickupPoints.remove_child(child)
-
+	Util.remove_children($PickupPoints)
 	$PickupPoints.columns = round(sqrt(count))
 
 	for i in range(count):
