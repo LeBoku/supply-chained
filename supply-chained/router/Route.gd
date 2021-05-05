@@ -3,7 +3,7 @@ extends Node2D
 const RouteSegment = preload("res://router/RouteSegment.tscn")
 
 var stations: Array
-var carrier: Node2D
+var carrier: Carrier
 var pickups: Dictionary
 
 func init(stations: Array, carrier:Node2D, pickups:Dictionary):
@@ -38,9 +38,11 @@ func handle_pickups(index: int):
 		for p in pickups[index]:
 			if p["dropoff"]:
 				yield(stations[index].dropoff(p["id"], "Test"), "completed")
+				carrier.set_cargo(0, null)
+				
 			else:
 				var content = yield(stations[index].pickup(p["id"]), "completed")
-				print(content)
+				carrier.set_cargo(0, content)
 
 	else:
 		yield(get_tree().create_timer(0), "timeout")

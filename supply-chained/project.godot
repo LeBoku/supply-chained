@@ -9,12 +9,18 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Node2D",
+"class": "Carrier",
+"language": "GDScript",
+"path": "res://carriers/Carrier.gd"
+}, {
 "base": "Position2D",
 "class": "Station",
 "language": "GDScript",
 "path": "res://station/Station.gd"
 } ]
 _global_script_class_icons={
+"Carrier": "",
 "Station": ""
 }
 
