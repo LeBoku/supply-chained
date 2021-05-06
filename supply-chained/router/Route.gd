@@ -35,14 +35,16 @@ func travel(from: Station, to: Station):
 		
 func handle_pickups(index: int):
 	if pickups.has(index):
+		var station = stations[index] as Station
 		for p in pickups[index]:
-			if p["dropoff"]:
-				yield(stations[index].dropoff(p["id"], "Test"), "completed")
-				carrier.set_cargo(0, null)
-				
-			else:
-				var content = yield(stations[index].pickup(p["id"]), "completed")
-				carrier.set_cargo(0, content)
+			var pickup = yield(stations[index].pickup(p["point"]), "completed")
+			var dropoff = yield(carrier.dropoff(p["cargo"]), "completed")
+			
+			if dropoff != null and pickup != null: 
+				yield(get_tree().create_timer(2), "timeout")
+			
+			carrier.set_cargo(p["cargo"], pickup)
+			station.dropoff(p["point"], dropoff)
 
 	else:
 		yield(get_tree().create_timer(0), "timeout")
