@@ -4,12 +4,9 @@ class_name Carrier
 
 signal cargo_changed
 
-export var cargo_capacity = 3
 export var cargo = []
 
 func _ready():
-	cargo = []
-	cargo.resize(cargo_capacity)
 	emit_signal("cargo_changed")
 
 func dropoff(position: int):

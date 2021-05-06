@@ -28,7 +28,7 @@ func pickup(id: String):
 	yield(get_tree().create_timer(2), "timeout")
 	return pickup_contents[id]
 
-func dropoff(id: String, content: String):
+func dropoff(id: String, content):
 	pickup_contents[id] = content
 
 func show_pickup_panel():
@@ -64,3 +64,7 @@ func set_pickup_stations(count: int):
 			pickup_contents[id] = null
 
 		button.connect("pressed", get_node('/root/RouteBuilder'), "add_pickup_point", [id])
+
+func _on_PeopleProduction_resources_produced(target, resource):
+	dropoff(target, resource)
+	print(target + resource)
