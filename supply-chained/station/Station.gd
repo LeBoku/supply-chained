@@ -4,35 +4,39 @@ class_name Station
 const Util = preload("res://util/Util.gd")
 
 signal selected(Station)
+signal pickups_changed
 
-export var available_resources = PoolStringArray()
-export var pickup_station_count = 2
-
-var pickup_contents = {}
+export var pickup_contents = []
 var out_connections = []
+
+onready var route_builder = get_node('/root/RouteBuilder')
 
 func _ready():
 	$Visual/Tween.interpolate_property($Visual, "scale:x", 0.2, 0.3, .3)
 	$Visual/Tween.interpolate_property($Visual, "scale:y", 0.2, 0.3, .3)
 	
-	set_pickup_stations(pickup_station_count)
+	$PickupPoints.render(pickup_contents)
 
 func set_enabled(enabled):
-	$Button.disabled = !enabled
 	$Visual/Tween.set_active(enabled)
 	
-	if !enabled:
-		$PickupPoints.visible = false
+func set_focused(state: bool):
+	if len(pickup_contents) == 1:
+		$"/root/RouteBuilder".add_pickup_point(0)
+	else:
+		$PickupPoints.set_enabled(state)
 	
-func pickup(id: String):
+func has_space(index:int):
+	return pickup_contents[index] == null
+	
+func pickup(index: int):
 	yield(get_tree().create_timer(2), "timeout")
-	return pickup_contents[id]
+	return pickup_contents[index]
 
-func dropoff(id: String, content):
-	pickup_contents[id] = content
-
-func show_pickup_panel():
-	$PickupPoints.visible = true
+func dropoff(index: int, content):
+	pickup_contents[index] = content
+	$PickupPoints.render(pickup_contents)
+	emit_signal("pickups_changed")
 	
 func get_connected_stations():
 	var stations = []
@@ -49,22 +53,5 @@ func get_connection_to(station:Station):
 func _on_pressed():
 	emit_signal("selected", self)
 
-func set_pickup_stations(count: int):
-	Util.remove_children($PickupPoints)
-	$PickupPoints.columns = round(sqrt(count))
-
-	for i in range(count):
-		var button = Button.new()
-		var id = str(i + 1)
-		button.text = id
-		
-		$PickupPoints.add_child(button)
-
-		if not pickup_contents.has(id):
-			pickup_contents[id] = null
-
-		button.connect("pressed", get_node('/root/RouteBuilder'), "add_pickup_point", [id])
-
-func _on_PeopleProduction_resources_produced(target, resource):
+func _on_resources_produced(target, resource):
 	dropoff(target, resource)
-	print(target + resource)

@@ -9,3 +9,4 @@ func _ready():
 
 func _on_station_selected(station: Station):
 	emit_signal("station_selected", station)
+	
