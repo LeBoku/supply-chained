@@ -1,14 +1,8 @@
 extends Line2D
 
-export var stationA: NodePath
-export var stationB: NodePath
-
 func _ready():
-	var statA = get_node(stationA) as Station
-	var statB = get_node(stationB) as Station
-
-	self.points[0] = statA.global_position
-	self.points[self.points.size()-1] = statB.global_position
+	var statA = get_station_at_point(points[0])
+	var statB = get_station_at_point(points[points.size()-1])
 
 	var curve = Curve2D.new()
 	var curve_reversed = Curve2D.new()
@@ -19,3 +13,10 @@ func _ready():
 
 	statA.out_connections.append({"curve":curve,"station": statB})
 	statB.out_connections.append({"curve":curve_reversed,"station": statA})
+
+func get_station_at_point(point: Vector2, buffer:int = 10):
+	var stations = get_tree().get_nodes_in_group('Station')
+	for s in stations:
+		var station := s as Station
+		if point.distance_to(station.position) < buffer:
+			return station

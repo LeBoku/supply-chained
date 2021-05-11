@@ -9,13 +9,13 @@
 [ext_resource path="res://Production/Production.gd" type="Script" id=7]
 [ext_resource path="res://Production/Recipie.gd" type="Script" id=8]
 
-[sub_resource type="Resource" id=2]
+[sub_resource type="Resource" id=1]
 script = ExtResource( 8 )
 produces = PoolStringArray( "C" )
 time = 10.0
 requires = PoolStringArray( "L" )
 
-[sub_resource type="Resource" id=1]
+[sub_resource type="Resource" id=2]
 script = ExtResource( 8 )
 produces = PoolStringArray( "L" )
 time = 5.0
@@ -59,8 +59,6 @@ __meta__ = {
 
 [node name="Rail4" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 163.333, 183.333, 148.667, 211.333 )
-stationA = NodePath("../MineStation")
-stationB = NodePath("../Town")
 
 [node name="MineStation" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 149.667, 158.667 )
@@ -68,8 +66,6 @@ pickup_contents = [ null ]
 
 [node name="Rail3" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 94, 184.666 )
-stationA = NodePath("../MineStation")
-stationB = NodePath("../MineStation1")
 
 [node name="MineStation1" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 94.3333, 184.667 )
@@ -80,13 +76,12 @@ position = Vector2( 72.2411, 187.669 )
 color = Color( 0.215686, 0.2, 0.2, 1 )
 polygon = PoolVector2Array( -1.16118, -1.84308, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
 script = ExtResource( 7 )
-recipies = [ SubResource( 2 ) ]
+recipies = [ SubResource( 1 ) ]
 produces_to = [ NodePath("../MineStation1") ]
 requires_from = [ NodePath("../MineStation1") ]
 
 [node name="Rail" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 149.333, 211, 127, 188, 94, 184.666 )
-stationB = NodePath("../MineStation1")
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 148, 210.667 )
@@ -97,12 +92,11 @@ position = Vector2( 155.232, 221.925 )
 color = Color( 0.407843, 0.305882, 0.0980392, 1 )
 polygon = PoolVector2Array( -1.16118, -1.84308, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
 script = ExtResource( 7 )
-recipies = [ SubResource( 1 ) ]
+recipies = [ SubResource( 2 ) ]
 produces_to = [ NodePath("../Town") ]
 
 [node name="Rail1" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 148.333, 211, 142.667, 229, 114, 223.333, 104.667, 239 )
-stationB = NodePath("../Farm")
 
 [node name="Farm" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 105.333, 239.667 )
@@ -110,8 +104,6 @@ pickup_contents = [ null ]
 
 [node name="Rail2" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 104.667, 239.666, 85.3333, 218.333, 116, 212.333, 90, 199.666, 92.6667, 184.666 )
-stationA = NodePath("../Farm")
-stationB = NodePath("../MineStation1")
 
 [node name="CarriersHud" type="VBoxContainer" parent="."]
 margin_left = 5.0
