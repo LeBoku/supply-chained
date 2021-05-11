@@ -4,7 +4,7 @@ class_name Station
 const Util = preload("res://util/Util.gd")
 
 signal selected(Station)
-signal pickups_changed
+signal contents_changed
 
 export var pickup_contents = []
 var out_connections = []
@@ -36,7 +36,7 @@ func pickup(index: int):
 func dropoff(index: int, content):
 	pickup_contents[index] = content
 	$PickupPoints.render(pickup_contents)
-	emit_signal("pickups_changed")
+	emit_signal("contents_changed")
 	
 func get_connected_stations():
 	var stations = []
