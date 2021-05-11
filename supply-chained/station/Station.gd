@@ -26,8 +26,8 @@ func set_focused(state: bool):
 	else:
 		$PickupPoints.set_enabled(state)
 	
-func has_space(index:int):
-	return pickup_contents[index] == null
+func has_content(index:int, content):
+	return pickup_contents[index] == content
 	
 func pickup(index: int):
 	yield(get_tree().create_timer(2), "timeout")
