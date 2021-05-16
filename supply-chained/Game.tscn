@@ -85,7 +85,7 @@ points = PoolVector2Array( 149.333, 211, 127, 188, 94, 184.666 )
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 148, 210.667 )
-pickup_contents = [ null, null ]
+pickup_contents = [ null ]
 
 [node name="Housing" type="Polygon2D" parent="Map"]
 position = Vector2( 155.232, 221.925 )
