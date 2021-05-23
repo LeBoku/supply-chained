@@ -1,3 +1,12 @@
+static func get_children_with_group(node: Node, group:String):
+	var children = []
+	
+	for child in node.get_children():
+		if child.is_in_group(group):
+			children.append(child)
+			
+	return children
+
 static func remove_children(node: Node):
 	for child in node.get_children():
 			node.remove_child(child)

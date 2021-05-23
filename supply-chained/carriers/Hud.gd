@@ -21,7 +21,7 @@ func display():
 		if carrier.cargo[index] != null:
 			button.text = carrier.cargo[index]
 
-		button.connect("pressed", get_node('/root/RouteBuilder'), "add_cargo_index", [index])
+#		button.connect("pressed", get_node('/root/RouteBuilder'), "add_cargo_index", [index])
 		add_child(button)
 
 	var button = Button.new()

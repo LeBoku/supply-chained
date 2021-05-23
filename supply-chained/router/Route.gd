@@ -2,28 +2,28 @@ extends Node2D
 
 const RouteSegment = preload("res://router/RouteSegment.tscn")
 
-var stations: Array
+var steps: Array
 var carrier: Carrier
-var pickups: Dictionary
 
-func init(stations: Array, carrier:Node2D, pickups:Dictionary):
-	self.stations = stations
+func init(steps:Array, carrier: Carrier):
+	self.steps = steps
 	self.carrier = carrier
-	self.pickups = pickups
 	return self
 
 func start():
-	var index = 0
+	carrier.visible = true
+	var step_index = 0
 	
 	while is_instance_valid(self):
-		yield(handle_pickups(index), 'completed')
+		var step =steps[step_index]
+		yield(handle_pickups(step[0], step[1]), 'completed')
 
-		var next_index = index + 1
-		if next_index > len(stations)-1:
+		var next_index = step_index + 1
+		if next_index > len(steps)-1:
 			next_index=0
 		
-		yield(travel(stations[index], stations[next_index]), 'completed')
-		index = next_index
+		yield(travel(steps[step_index][0], steps[next_index][0]), 'completed')
+		step_index = next_index
 		
 func travel(from: Station, to: Station):
 		var connection = from.get_connection_to(to)
@@ -33,19 +33,11 @@ func travel(from: Station, to: Station):
 		yield(segment, 'arrived')
 		segment.queue_free()
 		
-func handle_pickups(index: int):
-	if pickups.has(index):
-		var station = stations[index] as Station
-		for p in pickups[index]:
-			var pickup = yield(stations[index].pickup(p["point"]), "completed")
-			var dropoff = yield(carrier.dropoff(p["cargo"]), "completed")
-			
-			if dropoff != null and pickup != null: 
-				yield(get_tree().create_timer(2), "timeout")
-			
-			carrier.set_cargo(p["cargo"], pickup)
-			station.dropoff(p["point"], dropoff)
+func handle_pickups(station:Station, productions: Array):
+	carrier.cargo = yield(station.dropoff(carrier.cargo), 'completed')
+	carrier.update_cargo()
 
-	else:
-		yield(get_tree().create_timer(0), "timeout")
-	
+	for production in productions.slice(0, carrier.get_remaining_capacity()):
+		yield(carrier.add_cargo(production.produces), 'completed')
+
+#	carrier.add_cargo(pickup)

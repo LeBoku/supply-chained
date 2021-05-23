@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Production/Production.gd" type="Script" id=1]
+
+[node name="Production" type="Polygon2D"]
+position = Vector2( 12.847, 2.282 )
+z_index = -1
+color = Color( 0.215686, 0.2, 0.2, 1 )
+polygon = PoolVector2Array( -11.0278, 5.96655, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
+script = ExtResource( 1 )
+produces = "I"
+
+[node name="Button" type="Button" parent="."]
+margin_left = -9.0
+margin_top = -4.0
+margin_right = 10.0
+margin_bottom = 16.0
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

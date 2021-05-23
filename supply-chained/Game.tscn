@@ -1,25 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://connection/ConnectionHelper.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Map.gd" type="Script" id=4]
 [ext_resource path="res://carriers/Carrier.gd" type="Script" id=5]
 [ext_resource path="res://carriers/Hud.gd" type="Script" id=6]
-[ext_resource path="res://Production/Production.gd" type="Script" id=7]
-[ext_resource path="res://Production/Recipie.gd" type="Script" id=8]
-
-[sub_resource type="Resource" id=1]
-script = ExtResource( 8 )
-produces = PoolStringArray( "C" )
-time = 10.0
-requires = PoolStringArray( "L" )
-
-[sub_resource type="Resource" id=2]
-script = ExtResource( 8 )
-produces = PoolStringArray( "L" )
-time = 5.0
-requires = PoolStringArray(  )
+[ext_resource path="res://Production/Production.tscn" type="PackedScene" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -28,13 +14,13 @@ __meta__ = {
 }
 
 [node name="Map" type="Node2D" parent="."]
-script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="Continent" type="Polygon2D" parent="Map"]
 position = Vector2( -61.4489, 43.438 )
+z_index = -10
 color = Color( 0.698039, 0.878431, 0.407843, 1 )
 polygon = PoolVector2Array( 59.7825, -40.0342, 91.5664, 42.6039, 201.751, 24.593, 204.929, 72.2689, 251.545, 83.923, 282.27, 34.1282, 378, 64, 396, 34, 469.795, 47.9012, 440.13, 96.6365, 501.579, 91.3392, 576.8, 109.35, 678, 58, 639, 92, 661, 92, 672, 75, 695, 61, 690, 111, 559, 166, 607, 200, 553, 263, 434.832, 158.085, 445.427, 229.069, 409.405, 234.367, 356.432, 148.55, 344.778, 287.34, 433, 288, 430.595, 373.156, 504, 410, 556, 558, 403, 599, 110.637, 658.152, -46.1638, 462.151, -65.2341, 229.069 )
 __meta__ = {
@@ -43,6 +29,7 @@ __meta__ = {
 
 [node name="Island 1" type="Polygon2D" parent="Map"]
 position = Vector2( 583.764, 19.3806 )
+z_index = -10
 color = Color( 0.698039, 0.878431, 0.407843, 1 )
 polygon = PoolVector2Array( 284.389, 197.286, 251.545, 83.923, 282.27, 34.1282, 378, 64, 396, 34, 469.795, 47.9012, 440.13, 96.6365, 501.579, 91.3392, 576.8, 109.35, 678, 58, 639, 92, 661, 92, 672, 75, 695, 61, 690, 111, 559, 166, 607, 200, 553, 263, 476.647, 234.074, 459.848, 237.434, 409.405, 234.367, 424.99, 277.332, 344.778, 287.34 )
 __meta__ = {
@@ -51,6 +38,7 @@ __meta__ = {
 
 [node name="Island 2" type="Polygon2D" parent="Map"]
 position = Vector2( 430.142, 290.293 )
+z_index = -10
 color = Color( 0.698039, 0.878431, 0.407843, 1 )
 polygon = PoolVector2Array( 284.389, 197.286, 251.545, 83.923, 282.27, 34.1282, 378, 64, 373.384, 132.658, 440.13, 96.6365, 479.33, 53.1985, 678, 58, 639, 92, 520.649, 152.788, 607, 200, 553, 263, 478.27, 294.756, 392.454, 289.459, 409.405, 234.367, 372.324, 264.032, 344.778, 287.34 )
 __meta__ = {
@@ -60,69 +48,75 @@ __meta__ = {
 [node name="Rail4" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 163.333, 183.333, 148.667, 211.333 )
 
-[node name="MineStation" parent="Map" instance=ExtResource( 2 )]
+[node name="IronMine" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 149.667, 158.667 )
-pickup_contents = [ null ]
+
+[node name="Mine" parent="Map/IronMine" instance=ExtResource( 8 )]
 
 [node name="Rail3" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 94, 184.666 )
 
-[node name="MineStation1" parent="Map" instance=ExtResource( 2 )]
+[node name="CoalMine" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 94.3333, 184.667 )
-pickup_contents = [ null ]
 
-[node name="Mine" type="Polygon2D" parent="Map"]
-position = Vector2( 72.2411, 187.669 )
-color = Color( 0.215686, 0.2, 0.2, 1 )
-polygon = PoolVector2Array( -1.16118, -1.84308, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
-script = ExtResource( 7 )
-recipies = [ SubResource( 1 ) ]
-produces_to = [ NodePath("../MineStation1") ]
-requires_from = [ NodePath("../MineStation1") ]
+[node name="Mine" parent="Map/CoalMine" instance=ExtResource( 8 )]
+position = Vector2( -11.3335, -5.84425 )
+color = Color( 0.0196078, 0.0196078, 0.0196078, 1 )
+polygon = PoolVector2Array( -6.08858, 1.0598, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
+produces = "C"
 
 [node name="Rail" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 149.333, 211, 127, 188, 94, 184.666 )
+points = PoolVector2Array( 149.333, 211, 123.771, 203.36, 127, 188, 94, 184.666 )
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 148, 210.667 )
-pickup_contents = [ null ]
 
-[node name="Housing" type="Polygon2D" parent="Map"]
-position = Vector2( 155.232, 221.925 )
-color = Color( 0.407843, 0.305882, 0.0980392, 1 )
-polygon = PoolVector2Array( -1.16118, -1.84308, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
-script = ExtResource( 7 )
-recipies = [ SubResource( 2 ) ]
-produces_to = [ NodePath("../Town") ]
+[node name="Housing" parent="Map/Town" instance=ExtResource( 8 )]
+position = Vector2( 0.162125, -5.05144 )
+color = Color( 0.823529, 0.768627, 0.768627, 1 )
+polygon = PoolVector2Array( -11.0278, 5.96655, 10.2097, -12.4535, 6.2019, 4.18028, 1.48888, 19.0605 )
+produces = "L"
 
 [node name="Rail1" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 148.333, 211, 142.667, 229, 114, 223.333, 104.667, 239 )
 
 [node name="Farm" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 105.333, 239.667 )
-pickup_contents = [ null ]
+
+[node name="Farm" parent="Map/Farm" instance=ExtResource( 8 )]
+position = Vector2( 0.162125, -5.05144 )
+color = Color( 0.854902, 0.921569, 0.184314, 1 )
+polygon = PoolVector2Array( -11.0278, 5.96655, 10.2097, -12.4535, 6.2019, 4.18028, 1.48888, 19.0605 )
+produces = "F"
 
 [node name="Rail2" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 104.667, 239.666, 85.3333, 218.333, 116, 212.333, 90, 199.666, 92.6667, 184.666 )
-
-[node name="CarriersHud" type="VBoxContainer" parent="."]
-margin_left = 5.0
-margin_top = 5.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Train1Hud" type="HBoxContainer" parent="CarriersHud"]
-script = ExtResource( 6 )
-carrier_path = NodePath("../../Train1")
 
 [node name="Train1" type="Polygon2D" parent="."]
 visible = false
 antialiased = true
 polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
 script = ExtResource( 5 )
-cargo = [ null, null ]
+cargo = [ null, null, null, null, null ]
 
-[connection signal="resources_produced" from="Map/Mine" to="Map/Town" method="_on_resources_produced"]
-[connection signal="resources_produced" from="Map/Housing" to="Map/Town" method="_on_resources_produced"]
-[connection signal="carrier_selected" from="CarriersHud/Train1Hud" to="." method="_on_carrier_selected"]
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2( 200, 250 )
+current = true
+zoom = Vector2( 0.5, 0.5 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="CarriersHud" type="VBoxContainer" parent="HUD"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 5.0
+margin_bottom = 5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Train1Hud" type="HBoxContainer" parent="HUD/CarriersHud"]
+script = ExtResource( 6 )
+carrier_path = NodePath("../../../Train1")
+
+[connection signal="carrier_selected" from="HUD/CarriersHud/Train1Hud" to="." method="_on_carrier_selected"]

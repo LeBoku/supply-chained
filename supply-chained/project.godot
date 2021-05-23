@@ -14,10 +14,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://carriers/Carrier.gd"
 }, {
-"base": "Resource",
-"class": "Recipie",
+"base": "Node2D",
+"class": "Production",
 "language": "GDScript",
-"path": "res://Production/Recipie.gd"
+"path": "res://Production/Production.gd"
 }, {
 "base": "Position2D",
 "class": "Station",
@@ -26,7 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Carrier": "",
-"Recipie": "",
+"Production": "",
 "Station": ""
 }
 

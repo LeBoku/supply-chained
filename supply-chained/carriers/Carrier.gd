@@ -4,16 +4,27 @@ class_name Carrier
 
 signal cargo_changed
 
-export var cargo = []
+export var cargo: Array = []
 
 func _ready():
 	emit_signal("cargo_changed")
 
-func dropoff(position: int):
-	var dropoff = cargo[position]
-	yield(get_tree().create_timer(2), "timeout")
-	return dropoff
+func get_empty_cargo_spot():
+	return cargo.find(null)
 
-func set_cargo(position: int, content):
-	cargo[position] = content
+func get_remaining_capacity():
+	return len(cargo) - get_empty_cargo_spot()
+
+func add_cargo(content):
+	var index = get_empty_cargo_spot()
+	var timeout = 0
+	
+	if index != -1:
+		cargo[index] = content
+		timeout = 1
+		update_cargo()
+
+	yield(get_tree().create_timer(timeout), "timeout")
+		
+func update_cargo():
 	emit_signal("cargo_changed")
