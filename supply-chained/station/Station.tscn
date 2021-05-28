@@ -12,7 +12,3 @@ script = ExtResource( 1 )
 light_mask = -2147483647
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
-
-[node name="Tween" type="Tween" parent="Visual"]
-repeat = true
-playback/repeat = true

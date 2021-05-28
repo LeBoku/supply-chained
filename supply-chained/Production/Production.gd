@@ -4,7 +4,7 @@ class_name Production
 export var produces: String
 
 func _ready():
-	add_to_group("production")
+	add_to_group("Production")
 	$Sprite.texture = $"/root/MaterialHelper".get_icon(produces)
 	var parent_position = get_parent().global_position
 	
@@ -14,3 +14,6 @@ func _ready():
 		
 func _on_Button_pressed():
 	$"/root/RouteBuilder".add_step(get_parent(), self)
+
+func set_enabled(enabled):
+	$Sprite/Highlighter.set_active(enabled)

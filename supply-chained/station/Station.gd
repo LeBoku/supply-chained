@@ -7,13 +7,6 @@ var out_connections = []
 
 onready var route_builder = get_node('/root/RouteBuilder')
 
-func _ready():
-	$Visual/Tween.interpolate_property($Visual, "scale:x", 0.2, 0.3, .3)
-	$Visual/Tween.interpolate_property($Visual, "scale:y", 0.2, 0.3, .3)
-
-func set_enabled(enabled):
-	$Visual/Tween.set_active(enabled)
-
 func get_connected_stations():
 	var stations = []
 	for conn in out_connections:
