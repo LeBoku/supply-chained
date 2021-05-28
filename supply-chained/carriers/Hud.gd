@@ -6,27 +6,26 @@ const Util = preload("res://util/Util.gd")
 
 export var carrier_path: NodePath
 onready var carrier = get_node(carrier_path) as Carrier
+onready var materials = $"/root/MaterialHelper"
 
 func _ready():
 	display()
 	carrier.connect("cargo_changed", self, "display")
 
-func display():
-	Util.remove_children(self)
+	$Name.text = carrier.name+" >"
+	Util.propagate_signal($Name, "pressed", self, "carrier_selected", [carrier])
 
+	for cargo in carrier.cargo:
+		var el = $CargoSpace.duplicate()
+		el.get_node("Payload").texture = null
+		add_child(el)
+		move_child(el, 0)
+
+	remove_child($CargoSpace)
+
+func display():
 	for index in range(len(carrier.cargo)):
-		var button = Button.new()
-		button.text = " "
+		var el = get_child(index)
 
 		if carrier.cargo[index] != null:
-			button.text = carrier.cargo[index]
-
-#		button.connect("pressed", get_node('/root/RouteBuilder'), "add_cargo_index", [index])
-		add_child(button)
-
-	var button = Button.new()
-	button.text = carrier.name+">"
-	
-	Util.propagate_signal(button, "pressed", self, "carrier_selected", [carrier])
-
-	add_child(button)
+			el.get_node("Payload").texture = materials.get_icon(carrier.cargo[index])
