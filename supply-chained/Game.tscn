@@ -5,7 +5,7 @@
 [ext_resource path="res://connection/ConnectionHelper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://carriers/Carrier.gd" type="Script" id=5]
 [ext_resource path="res://carriers/Hud.gd" type="Script" id=6]
-[ext_resource path="res://Production/Production.tscn" type="PackedScene" id=8]
+[ext_resource path="res://production/Production.tscn" type="PackedScene" id=8]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -52,6 +52,7 @@ points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 163.333, 183.333,
 position = Vector2( 149.667, 158.667 )
 
 [node name="Mine" parent="Map/IronMine" instance=ExtResource( 8 )]
+polygon = PoolVector2Array( -11.0278, 5.96655, -2.75476, -4.05777, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
 
 [node name="Rail3" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 94, 184.666 )
@@ -75,6 +76,13 @@ position = Vector2( 148, 210.667 )
 position = Vector2( 0.162125, -5.05144 )
 color = Color( 0.823529, 0.768627, 0.768627, 1 )
 polygon = PoolVector2Array( -11.0278, 5.96655, 10.2097, -12.4535, 6.2019, 4.18028, 1.48888, 19.0605 )
+produces = "L"
+
+[node name="Factory" parent="Map/Town" instance=ExtResource( 8 )]
+position = Vector2( 11.0571, 6.28507 )
+scale = Vector2( 0.841186, 0.909091 )
+color = Color( 0.266667, 0.266667, 0.266667, 1 )
+polygon = PoolVector2Array( -5.52708, 3.04581, -2.69963, -3.49483, 4.13338, 0.211533, 2.24838, 5.008 )
 produces = "L"
 
 [node name="Rail1" parent="Map" instance=ExtResource( 3 )]

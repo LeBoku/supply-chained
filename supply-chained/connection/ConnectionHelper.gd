@@ -18,6 +18,5 @@ func get_station_at_point(point: Vector2, buffer:int = 5):
 	var stations = get_tree().get_nodes_in_group('Station')
 	for s in stations:
 		var station := s as Station
-		print(point.distance_to(station.position))
 		if point.distance_to(station.position) <= buffer:
 			return station

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Production/Production.gd" type="Script" id=1]
+[ext_resource path="res://production/Production.gd" type="Script" id=1]
 
 [node name="Production" type="Polygon2D"]
 position = Vector2( 12.847, 2.282 )
@@ -19,5 +19,10 @@ flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Connector" type="Line2D" parent="."]
+visible = false
+width = 1.0
+default_color = Color( 0.666667, 0.643137, 0.643137, 1 )
 
 [connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

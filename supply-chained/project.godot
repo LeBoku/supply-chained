@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Production",
 "language": "GDScript",
-"path": "res://Production/Production.gd"
+"path": "res://production/Production.gd"
 }, {
 "base": "Position2D",
 "class": "Station",
