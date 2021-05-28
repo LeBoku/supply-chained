@@ -3,6 +3,8 @@ extends Line2D
 func _ready():
 	var statA = get_station_at_point(points[0])
 	var statB = get_station_at_point(points[points.size()-1])
+	points[0] = statA.position
+	points[points.size()-1] = statB.position
 
 	var curve = Curve2D.new()
 	var curve_reversed = Curve2D.new()

@@ -1,28 +1,27 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://production/Production.gd" type="Script" id=1]
+[ext_resource path="res://material/icons/placeholder.png" type="Texture" id=2]
 
-[node name="Production" type="Polygon2D"]
-position = Vector2( 12.847, 2.282 )
-z_index = -1
-color = Color( 0.215686, 0.2, 0.2, 1 )
-polygon = PoolVector2Array( -11.0278, 5.96655, 5.64067, -1.99326, 6.2019, 4.18028, 0.163147, 5.83803 )
+[node name="Production" type="Position2D"]
 script = ExtResource( 1 )
-produces = "I"
 
 [node name="Button" type="Button" parent="."]
-margin_left = -9.0
-margin_top = -4.0
+margin_left = -10.0
+margin_top = -10.0
 margin_right = 10.0
-margin_bottom = 16.0
+margin_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+
 [node name="Connector" type="Line2D" parent="."]
-visible = false
 width = 1.0
 default_color = Color( 0.666667, 0.643137, 0.643137, 1 )
-
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
