@@ -89,7 +89,7 @@ position = Vector2( 18.106, 7.90728 )
 produces = "iron"
 
 [node name="Rail5" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 133.444, 225.105, 141.432, 216.556, 126.348, 202.002, 152.364, 200.439 )
+points = PoolVector2Array( 133.444, 225.105, 141.432, 216.556, 168.618, 212.681, 152.364, 200.439 )
 
 [node name="Farm" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 105.333, 239.667 )
@@ -127,3 +127,5 @@ __meta__ = {
 [node name="Train1Hud" parent="HUD/CarriersHud" instance=ExtResource( 4 )]
 margin_right = 90.0
 margin_bottom = 24.0
+
+[connection signal="carrier_selected" from="HUD/CarriersHud/Train1Hud" to="." method="_on_carrier_selected"]

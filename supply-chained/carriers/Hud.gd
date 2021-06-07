@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+signal carrier_selected(Carrier)
+
 const Util = preload("res://util/Util.gd")
 
 export var carrier_path: NodePath
@@ -24,6 +26,9 @@ func _ready():
 func display():
 	for index in range(len(carrier.cargo)):
 		var el = get_child(index)
+		var texture = null
 
 		if carrier.cargo[index] != null:
-			el.get_node("Payload").texture = materials.get_icon(carrier.cargo[index])
+			texture = materials.get_icon(carrier.cargo[index])
+			
+		el.get_node("Payload").texture = texture
