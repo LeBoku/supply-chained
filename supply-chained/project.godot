@@ -41,6 +41,11 @@ config/icon="res://icon.png"
 RouteBuilder="*res://route-builder/RouteBuilder.gd"
 MaterialHelper="*res://material/material_helper.gd"
 
+[debug]
+
+gdscript/warnings/shadowed_variable=false
+gdscript/warnings/return_value_discarded=false
+
 [rendering]
 
 environment/default_clear_color=Color( 0.396078, 0.878431, 0.929412, 1 )

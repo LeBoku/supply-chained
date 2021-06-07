@@ -6,6 +6,7 @@
 [node name="Station" type="Position2D" groups=[
 "Station",
 ]]
+z_index = 1
 script = ExtResource( 1 )
 
 [node name="Visual" type="Sprite" parent="."]

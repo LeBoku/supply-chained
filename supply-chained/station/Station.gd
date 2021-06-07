@@ -3,6 +3,7 @@ class_name Station
 
 const Util = preload("res://util/Util.gd")
 
+export var requires = PoolStringArray()
 var out_connections = []
 
 onready var route_builder = get_node('/root/RouteBuilder')
@@ -22,10 +23,10 @@ func get_connection_to(station:Station):
 func dropoff(cargo:Array):
 	var timeout = 0
 	
-	var i = rand_range(0, len(cargo)*2)
-	if i<len(cargo) and cargo[i] != null:
-		cargo[i] = null
-		timeout=2
-		
+	for r in requires:
+		if cargo.has(r):
+			timeout += 1
+			cargo[cargo.find(r)] = null
+			
 	yield(get_tree().create_timer(timeout), "timeout")
 	return cargo
