@@ -52,7 +52,7 @@ points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 163.333, 183.333,
 position = Vector2( 149.667, 158.667 )
 
 [node name="Mine" parent="Map/IronMine" instance=ExtResource( 8 )]
-position = Vector2( -8.12624, -15.6579 )
+position = Vector2( -4.78914, -15.6579 )
 produces = "iron-ore"
 
 [node name="Rail3" parent="Map" instance=ExtResource( 3 )]
@@ -103,6 +103,7 @@ points = PoolVector2Array( 104.667, 239.666, 83.1881, 225.362, 95.4242, 215.128,
 
 [node name="Train1" type="Polygon2D" parent="."]
 visible = false
+z_index = 10
 antialiased = true
 polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
 script = ExtResource( 5 )
