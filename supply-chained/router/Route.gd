@@ -39,3 +39,4 @@ func handle_pickups(station:Station, productions: Array):
 
 	for production in productions.slice(0, carrier.get_remaining_capacity()):
 		yield(carrier.add_cargo(production.produces), 'completed')
+	carrier.update_cargo()

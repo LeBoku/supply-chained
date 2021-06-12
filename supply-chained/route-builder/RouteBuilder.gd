@@ -18,14 +18,17 @@ func build_route(carrier):
 
 func add_step(station: Station, production: Production):
 	enable_stops(false)
-
-	if len(steps)>1 and station == steps[0][0]:
+	
+	if len(steps) > 0 and station == steps[-1][0]:
+		steps[-1][1].append(production)
+		enable_stops(true)
+		
+	elif len(steps) > 1 and station == steps[0][0]:
 		emit_signal("route_finalized")
+		
 	else:
 		steps.append([station, [production]])
 		enable_stops(true)
-	
-	production.set_enabled(false)
 
 func enable_stops(enabled: bool):
 	for p in get_tree().get_nodes_in_group('Production'):

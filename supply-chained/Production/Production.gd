@@ -5,6 +5,8 @@ export var produces: String
 
 func _ready():
 	add_to_group("Production")
+	set_enabled(false)
+	
 	$Sprite.texture = $"/root/MaterialHelper".get_icon(produces)
 	
 	$Connector.visible = true
@@ -16,3 +18,4 @@ func _on_Button_pressed():
 
 func set_enabled(enabled):
 	$Sprite/Highlighter.set_active(enabled)
+	$Button.disabled = not enabled
