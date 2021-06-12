@@ -70,12 +70,10 @@ points = PoolVector2Array( 153.524, 200.69, 125.806, 201.949, 127, 188, 94, 184.
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 153.46, 199.748 )
-requires = PoolStringArray( "" )
 
-[node name="WoodCutter" parent="Map/Town" instance=ExtResource( 8 )]
-position = Vector2( 17.2013, -4.21957 )
-scale = Vector2( 0.841186, 0.909091 )
-produces = "wood"
+[node name="Labor" parent="Map/Town" instance=ExtResource( 8 )]
+position = Vector2( 19.8526, -2.24747 )
+produces = "labor"
 
 [node name="Rail1" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 133.366, 225.888, 109.218, 228.032, 104.667, 239 )
@@ -85,7 +83,7 @@ position = Vector2( 133.333, 225.333 )
 requires = PoolStringArray( "iron-ore", "coal" )
 
 [node name="Iron" parent="Map/Smelter" instance=ExtResource( 8 )]
-position = Vector2( 18.106, 7.90728 )
+position = Vector2( 26.129, 0.356285 )
 produces = "iron"
 
 [node name="Rail5" parent="Map" instance=ExtResource( 3 )]
@@ -128,5 +126,4 @@ __meta__ = {
 [node name="Train1Hud" parent="HUD/CarriersHud" instance=ExtResource( 4 )]
 margin_right = 90.0
 margin_bottom = 24.0
-
 [connection signal="carrier_selected" from="HUD/CarriersHud/Train1Hud" to="." method="_on_carrier_selected"]
