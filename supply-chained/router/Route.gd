@@ -15,12 +15,14 @@ func start():
 	var step_index = 0
 	
 	while is_instance_valid(self):
-		var step =steps[step_index]
-		yield(handle_pickups(step[0], step[1]), 'completed')
+		var step = steps[step_index]
+		
+		if len(step[1])>0:
+			yield(handle_pickups(step[0], step[1]), 'completed')
 
 		var next_index = step_index + 1
-		if next_index > len(steps)-1:
-			next_index=0
+		if next_index > len(steps) - 1:
+			next_index = 0
 		
 		yield(travel(steps[step_index][0], steps[next_index][0]), 'completed')
 		step_index = next_index
@@ -39,4 +41,5 @@ func handle_pickups(station:Station, productions: Array):
 
 	for production in productions.slice(0, carrier.get_remaining_capacity()):
 		yield(carrier.add_cargo(production.produces), 'completed')
+
 	carrier.update_cargo()
