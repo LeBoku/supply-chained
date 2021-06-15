@@ -112,7 +112,6 @@ produces = "wheat"
 points = PoolVector2Array( 95.4242, 215.128, 90, 199.666, 92.6667, 184.666 )
 
 [node name="Train1" type="Polygon2D" parent="."]
-visible = false
 z_index = 10
 antialiased = true
 polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )

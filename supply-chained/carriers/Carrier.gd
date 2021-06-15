@@ -6,6 +6,8 @@ signal cargo_changed
 
 export var cargo: Array = []
 
+var current_route = null 
+
 func _ready():
 	emit_signal("cargo_changed")
 

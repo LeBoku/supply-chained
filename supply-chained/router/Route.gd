@@ -1,20 +1,32 @@
 extends Node2D
 
+class_name Route
+
+signal finished_route(Station)
+
 const RouteSegment = preload("res://router/RouteSegment.tscn")
 
 var steps: Array
-var carrier: Carrier
+var repeats = true
 
-func init(steps:Array, carrier: Carrier):
+var carrier: Carrier
+var active = false
+
+func init(steps:Array, repeats = true):
 	self.steps = steps
+	self.repeats = repeats
+	return self
+	
+func add_carrier(carrier: Carrier):
 	self.carrier = carrier
+	carrier.current_route = self
 	return self
 
 func start():
-	carrier.visible = true
+	active = true
 	var step_index = 0
 	
-	while is_instance_valid(self):
+	while active and is_instance_valid(self):
 		var step = steps[step_index]
 		
 		if len(step[1])>0:
@@ -22,10 +34,15 @@ func start():
 
 		var next_index = step_index + 1
 		if next_index > len(steps) - 1:
-			next_index = 0
+			if repeats:
+				next_index = 0
+			else:
+				break
 		
 		yield(travel(steps[step_index][0], steps[next_index][0]), 'completed')
 		step_index = next_index
+	
+	emit_signal("finished_route", steps[step_index][0])
 		
 func travel(from: Station, to: Station):
 		var connection = from.get_connection_to(to)
@@ -43,3 +60,10 @@ func handle_pickups(station:Station, productions: Array):
 		yield(carrier.add_cargo(production.produces), 'completed')
 
 	carrier.update_cargo()
+	
+func finish():
+	active = false
+	var current_station = yield(self, "finished_route")
+	queue_free()
+	
+	return current_station

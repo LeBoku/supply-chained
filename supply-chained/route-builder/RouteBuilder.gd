@@ -8,14 +8,22 @@ const Sorter = preload("res://util/Sorter.gd");
 var active = false
 var steps = []
 
-func build_route(carrier):
+func get_temporary_route(from_station: Station, to_station: Station):
+	var stations = [from_station] + get_steps_between(from_station, to_station) + [to_station]
+	var steps = []
+	
+	for station in stations:
+		steps.append([station, []])
+		
+	return Route.instance().init(steps, false)
+
+func build_route():
 	active = true
 	steps = []
 	enable_stops(true)
 
 	yield(self, "route_finalized")
-
-	return Route.instance().init(steps, carrier)
+	return Route.instance().init(steps)
 
 func add_step(station: Station, production: Production):
 	enable_stops(false)
