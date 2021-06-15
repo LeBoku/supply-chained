@@ -6,6 +6,7 @@ var icons = {
 	"iron-ore": preload("res://material/icons/iron-ore.png"),
 	"iron": preload("res://material/icons/iron.png"),
 	"wheat": preload("res://material/icons/wheat.png"),
+	"bread": preload("res://material/icons/bread.png"),
 	"wood": preload("res://material/icons/wood.png"),
 	"labor": preload("res://material/icons/labor.png"),
 }

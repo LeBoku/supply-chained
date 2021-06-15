@@ -70,6 +70,7 @@ points = PoolVector2Array( 153.524, 200.69, 138.102, 191.347, 121.695, 198.106, 
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 153.46, 199.748 )
+requires = PoolStringArray( "iron", "bread" )
 
 [node name="Labor" parent="Map/Town" instance=ExtResource( 8 )]
 position = Vector2( -4.22884, -12.0584 )
@@ -80,11 +81,22 @@ points = PoolVector2Array( 133.366, 225.888, 109.218, 228.032, 112.665, 237.596,
 
 [node name="Smelter" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 133.333, 225.333 )
-requires = PoolStringArray( "iron-ore", "coal" )
+requires = PoolStringArray( "iron-ore", "coal", "labor" )
 
 [node name="Iron" parent="Map/Smelter" instance=ExtResource( 8 )]
 position = Vector2( -10.1418, -11.2385 )
 produces = "iron"
+
+[node name="Rail6" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 105.54, 238.907, 96.9245, 225.797, 94.3025, 219.055 )
+
+[node name="Mill" parent="Map" instance=ExtResource( 2 )]
+position = Vector2( 94.0024, 216.343 )
+requires = PoolStringArray( "labor", "wheat" )
+
+[node name="Mill" parent="Map/Mill" instance=ExtResource( 8 )]
+position = Vector2( -10.1418, -11.2385 )
+produces = "bread"
 
 [node name="Rail5" parent="Map" instance=ExtResource( 3 )]
 points = PoolVector2Array( 133.444, 225.105, 141.432, 216.556, 147.982, 213.421, 152.364, 200.439 )
@@ -97,7 +109,7 @@ position = Vector2( -12.3226, 12.5649 )
 produces = "wheat"
 
 [node name="Rail2" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 104.667, 239.666, 90.381, 229.187, 87.4378, 221.409, 95.4242, 215.128, 90, 199.666, 92.6667, 184.666 )
+points = PoolVector2Array( 95.4242, 215.128, 90, 199.666, 92.6667, 184.666 )
 
 [node name="Train1" type="Polygon2D" parent="."]
 visible = false
