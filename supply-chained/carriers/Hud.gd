@@ -10,6 +10,7 @@ onready var materials = $"/root/MaterialHelper"
 
 func _ready():
 	$Cargo.initialize(carrier)
+	$CurrentRoute.initialize(carrier)
 
 func _on_Name_pressed():
 	emit_signal("carrier_selected", carrier)

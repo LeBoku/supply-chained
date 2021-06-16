@@ -3,10 +3,11 @@ extends Node2D
 class_name Carrier
 
 signal cargo_changed
+signal route_changed
 
 export var cargo: Array = []
 
-var current_route = null 
+var current_route = null
 
 func _ready():
 	emit_signal("cargo_changed")
@@ -31,3 +32,6 @@ func add_cargo(content):
 		
 func update_cargo():
 	emit_signal("cargo_changed")
+	
+func update_route():
+	emit_signal("route_changed")

@@ -7,8 +7,9 @@ static func get_children_with_group(node: Node, group:String):
 			
 	return children
 
-static func remove_children(node: Node):
+static func remove_children(node: Node, exclude: Array):
 	for child in node.get_children():
+		if not exclude.has(child):
 			node.remove_child(child)
 
 static func propagate_signal(node: Node, signal_name: String, to_node:Node, to_signal_name:String, arguments:Array=[]):

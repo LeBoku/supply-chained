@@ -11,7 +11,6 @@ func _ready():
 		hud.carrier = carrier
 		hud.connect("carrier_selected", self, "_on_carrier_selected")
 		$HUD/CarriersHud.add_child(hud)
-		
 
 func _on_carrier_selected(carrier: Carrier):
 	var route = yield(route_builder.build_route(), "completed")

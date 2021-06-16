@@ -20,6 +20,7 @@ func init(steps:Array, repeats = true):
 func add_carrier(carrier: Carrier):
 	self.carrier = carrier
 	carrier.current_route = self
+	carrier.update_route()
 	return self
 
 func start():
