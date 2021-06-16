@@ -10,6 +10,7 @@ var current_route = null
 
 func _ready():
 	emit_signal("cargo_changed")
+	add_to_group("carrier")
 
 func get_empty_cargo_spot():
 	return cargo.find(null)

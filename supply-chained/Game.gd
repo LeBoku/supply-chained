@@ -1,8 +1,17 @@
 extends Node2D
 
 const Route = preload("res://router/Route.tscn")
+const CarierHud = preload("res://carriers/Hud.tscn")
 
 onready var route_builder = get_node("/root/RouteBuilder")
+
+func _ready():
+	for carrier in get_tree().get_nodes_in_group("carrier"):
+		var hud = CarierHud.instance()
+		hud.carrier = carrier
+		hud.connect("carrier_selected", self, "_on_carrier_selected")
+		$HUD/CarriersHud.add_child(hud)
+		
 
 func _on_carrier_selected(carrier: Carrier):
 	var route = yield(route_builder.build_route(), "completed")

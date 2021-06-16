@@ -1,9 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://connection/ConnectionHelper.tscn" type="PackedScene" id=3]
-[ext_resource path="res://carriers/Hud.tscn" type="PackedScene" id=4]
 [ext_resource path="res://carriers/Carrier.gd" type="Script" id=5]
 [ext_resource path="res://production/Production.tscn" type="PackedScene" id=8]
 
@@ -118,6 +117,13 @@ polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
 script = ExtResource( 5 )
 cargo = [ null, null, null, null, null ]
 
+[node name="Train2" type="Polygon2D" parent="."]
+z_index = 10
+antialiased = true
+polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
+script = ExtResource( 5 )
+cargo = [ null, null, null ]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2( 200, 250 )
 current = true
@@ -133,8 +139,3 @@ margin_bottom = 5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Train1Hud" parent="HUD/CarriersHud" instance=ExtResource( 4 )]
-margin_right = 90.0
-margin_bottom = 24.0
-[connection signal="carrier_selected" from="HUD/CarriersHud/Train1Hud" to="." method="_on_carrier_selected"]
