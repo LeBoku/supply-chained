@@ -1,6 +1,7 @@
 extends Node2D
 
 class_name Production
+export var requires: PoolStringArray = ["labor"]
 export var produces: String
 
 func _ready():

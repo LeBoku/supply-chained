@@ -3,12 +3,15 @@ class_name Station
 
 const Util = preload("res://util/Util.gd")
 
-export var requires = PoolStringArray(["labor"])
 var out_connections = []
+var requires = PoolStringArray()
 
 onready var route_builder = get_node('/root/RouteBuilder')
 
 func _ready():
+	for production in Util.get_children_with_group(self, "Production"):
+		requires.append_array(production.requires)
+	
 	display_requirements()
 
 func get_connected_stations():
