@@ -11,8 +11,6 @@ onready var route_builder = get_node('/root/RouteBuilder')
 func _ready():
 	for production in Util.get_children_with_group(self, "Production"):
 		requires.append_array(production.requires)
-	
-	display_requirements()
 
 func get_connected_stations():
 	var stations = []
@@ -36,13 +34,3 @@ func dropoff(cargo:Array):
 			
 	yield(get_tree().create_timer(timeout), "timeout")
 	return cargo
-
-func display_requirements():
-	$Requirements.visible = len(requires) > 0
-	for r in requires:
-		var icon = $"/root/MaterialHelper".get_icon(r)
-		var sprite = $Requirements/Box/Template.duplicate()
-		sprite.texture = icon
-		$Requirements/Box.add_child(sprite)
-
-	$Requirements/Box/Template.visible=false

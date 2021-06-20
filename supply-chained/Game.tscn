@@ -51,7 +51,7 @@ points = PoolVector2Array( 149.333, 160.666, 133.897, 173.058, 163.333, 183.333,
 position = Vector2( 149.667, 158.667 )
 
 [node name="Mine" parent="Map/IronMine" instance=ExtResource( 8 )]
-position = Vector2( -4.78914, -15.6579 )
+position = Vector2( 14.566, -3.86681 )
 produces = "iron-ore"
 
 [node name="Rail3" parent="Map" instance=ExtResource( 3 )]
@@ -61,7 +61,7 @@ points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 94, 184.666 )
 position = Vector2( 94.3333, 184.667 )
 
 [node name="Mine" parent="Map/CoalMine" instance=ExtResource( 8 )]
-position = Vector2( -21.2435, 3.273 )
+position = Vector2( -7.22768, -17.1945 )
 produces = "coal"
 
 [node name="Rail" parent="Map" instance=ExtResource( 3 )]
@@ -71,7 +71,7 @@ points = PoolVector2Array( 153.524, 200.69, 138.102, 191.347, 121.695, 198.106, 
 position = Vector2( 153.46, 199.748 )
 
 [node name="Labor" parent="Map/Town" instance=ExtResource( 8 )]
-position = Vector2( -4.22884, -12.0584 )
+position = Vector2( 13.3466, -6.94152 )
 requires = PoolStringArray( "iron", "bread" )
 produces = "labor"
 
@@ -82,7 +82,7 @@ points = PoolVector2Array( 133.366, 225.888, 109.218, 228.032, 112.665, 237.596,
 position = Vector2( 133.333, 225.333 )
 
 [node name="Iron" parent="Map/Smelter" instance=ExtResource( 8 )]
-position = Vector2( -10.1418, -11.2385 )
+position = Vector2( 19.8921, -2.56205 )
 requires = PoolStringArray( "labor", "iron-ore", "coal" )
 produces = "iron"
 
@@ -93,7 +93,7 @@ points = PoolVector2Array( 105.54, 238.907, 96.9245, 225.797, 94.3025, 219.055 )
 position = Vector2( 94.0024, 216.343 )
 
 [node name="Mill" parent="Map/Mill" instance=ExtResource( 8 )]
-position = Vector2( -17.7059, 2.1099 )
+position = Vector2( -13.034, 4.33464 )
 requires = PoolStringArray( "labor", "wheat" )
 produces = "bread"
 
@@ -104,7 +104,7 @@ points = PoolVector2Array( 133.444, 225.105, 141.432, 216.556, 147.982, 213.421,
 position = Vector2( 105.333, 239.667 )
 
 [node name="Farm" parent="Map/Farm" instance=ExtResource( 8 )]
-position = Vector2( -12.3226, 12.5649 )
+position = Vector2( 8.36742, 9.45028 )
 produces = "wheat"
 
 [node name="Rail2" parent="Map" instance=ExtResource( 3 )]

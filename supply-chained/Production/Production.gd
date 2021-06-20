@@ -13,6 +13,8 @@ func _ready():
 	$Connector.visible = true
 	$Connector.add_point(Vector2())
 	$Connector.add_point(-position)
+	
+	$Requirements.display_requirements(requires)
 		
 func _on_Button_pressed():
 	$"/root/RouteBuilder".add_step(get_parent(), self)
