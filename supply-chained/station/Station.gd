@@ -2,15 +2,17 @@ extends Position2D
 class_name Station
 
 const Util = preload("res://util/Util.gd")
+export var wants = PoolStringArray()
 
 var out_connections = []
-var requires = PoolStringArray()
 
 onready var route_builder = get_node('/root/RouteBuilder')
 
 func _ready():
+	$Requirements.display_requirements(wants)
+
 	for production in Util.get_children_with_group(self, "Production"):
-		requires.append_array(production.requires)
+		wants.append_array(production.requires)
 
 func get_connected_stations():
 	var stations = []
@@ -24,13 +26,11 @@ func get_connection_to(station:Station):
 		if conn["station"] == station:
 			return conn
 
-func dropoff(cargo:Array):
-	var timeout = 0
+func dropoff(carrier):
+	yield(get_tree().create_timer(0), "timeout")
 	
-	for r in requires:
-		if cargo.has(r):
-			timeout += 1
-			cargo[cargo.find(r)] = null
-			
-	yield(get_tree().create_timer(timeout), "timeout")
-	return cargo
+	for r in wants:
+		if carrier.cargo.has(r):
+			carrier.remove_cargo(r)
+			yield(get_tree().create_timer(1), "timeout")
+	

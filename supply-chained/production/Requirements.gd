@@ -2,6 +2,7 @@ extends PanelContainer
 
 func display_requirements(requires:PoolStringArray):
 	visible = len(requires) > 0
+
 	for r in requires:
 		var icon = $"/root/MaterialHelper".get_icon(r)
 		var sprite = $Box/Template.duplicate()

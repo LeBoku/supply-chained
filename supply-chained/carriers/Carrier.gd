@@ -20,16 +20,19 @@ func get_remaining_capacity():
 	return len(cargo) - get_empty_cargo_spot()
 
 func add_cargo(content):
+	yield(get_tree().create_timer(0), "timeout")
 	var index = get_empty_cargo_spot()
-	var timeout = 0
 	
 	if index != -1:
 		cargo[index] = content
-		timeout = 1
+		yield(get_tree().create_timer(1), "timeout")
 		update_cargo()
 
-	yield(get_tree().create_timer(timeout), "timeout")
 		
+func remove_cargo(content):
+	cargo[cargo.find(content)] = null
+	update_cargo()
+
 func update_cargo():
 	emit_signal("cargo_changed")
 	

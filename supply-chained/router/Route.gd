@@ -54,14 +54,11 @@ func travel(from: Station, to: Station):
 		segment.queue_free()
 		
 func handle_pickups(station:Station, productions: Array):
-	carrier.cargo = yield(station.dropoff(carrier.cargo), 'completed')
-	carrier.update_cargo()
+	yield(station.dropoff(carrier), 'completed')
 
 	for production in productions.slice(0, carrier.get_remaining_capacity()):
 		yield(carrier.add_cargo(production.produces), 'completed')
 
-	carrier.update_cargo()
-	
 func finish():
 	active = false
 	var current_station = yield(self, "finished_route")
