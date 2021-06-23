@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-signal carrier_selected(Carrier)
+signal carrier_selected(Carrier) 
 
 const Util = preload("res://util/Util.gd")
 

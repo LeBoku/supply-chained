@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "PanelContainer",
+"class": "CargoList",
+"language": "GDScript",
+"path": "res://cargo/cargo-list/CargoList.gd"
+}, {
 "base": "Node2D",
 "class": "Carrier",
 "language": "GDScript",
@@ -24,15 +29,22 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://router/Route.gd"
 }, {
+"base": "Node",
+"class": "RouteStep",
+"language": "GDScript",
+"path": "res://route-builder/RouteStep.gd"
+}, {
 "base": "Position2D",
 "class": "Station",
 "language": "GDScript",
 "path": "res://station/Station.gd"
 } ]
 _global_script_class_icons={
+"CargoList": "",
 "Carrier": "",
 "Production": "",
 "Route": "",
+"RouteStep": "",
 "Station": ""
 }
 

@@ -9,7 +9,7 @@ var out_connections = []
 onready var route_builder = get_node('/root/RouteBuilder')
 
 func _ready():
-	$Requirements.display_requirements(wants)
+	$Requirements.initialize_cargo(wants)
 
 	for production in Util.get_children_with_group(self, "Production"):
 		wants.append_array(production.requires)

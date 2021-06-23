@@ -1,19 +1,23 @@
 extends PanelContainer
+class_name CargoList
 
-signal selected(cargo)
+signal selected(list, cargo)
+var cargo = []
 
-func display_requirements(requires:PoolStringArray):
+func initialize_cargo(requires:PoolStringArray):
 	visible = len(requires) > 0
 
 	for r in requires:
 		var icon = $"/root/CargoHelper".get_icon(r)
 		var sprite = $Box/Template.duplicate()
 		sprite.texture = icon
-		sprite.connect("gui_input", self, "on_gui_event_sprite", [r])
+		sprite.connect("gui_input", self, "_on_sprite_gui_event", [r])
 		$Box.add_child(sprite)
+		cargo.append(1)
 
 	$Box/Template.visible = false
+	$Box.move_child($Box/Template, $Box.get_child_count())
 
-func on_gui_event_sprite(event:InputEvent, cargo:String):
+func _on_sprite_gui_event(event:InputEvent, cargo:String):
 	if event is InputEventMouseButton and event.button_index == 1:
-		emit_signal("selected", cargo, self)
+		emit_signal("selected", self, cargo)

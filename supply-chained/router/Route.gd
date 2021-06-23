@@ -28,10 +28,10 @@ func start():
 	var step_index = 0
 	
 	while active and is_instance_valid(self):
-		var step = steps[step_index]
+		var step = steps[step_index] as RouteStep
 		
-		if len(step[1])>0:
-			yield(handle_pickups(step[0], step[1]), 'completed')
+		if len(step.exchanges) > 0:
+			yield(handle_pickups(step), 'completed')
 
 		var next_index = step_index + 1
 		if next_index > len(steps) - 1:
@@ -40,12 +40,15 @@ func start():
 			else:
 				break
 		
-		yield(travel(steps[step_index][0], steps[next_index][0]), 'completed')
+		yield(travel(steps[step_index].station, steps[next_index].station), 'completed')
 		step_index = next_index
 	
-	emit_signal("finished_route", steps[step_index][0])
+	emit_signal("finished_route", steps[step_index].station)
 		
 func travel(from: Station, to: Station):
+	yield(get_tree().create_timer(0), "timeout")
+
+	if from != to:
 		var connection = from.get_connection_to(to)
 		var segment = RouteSegment.instance().init(connection["curve"], carrier.get_path())
 		
@@ -53,11 +56,11 @@ func travel(from: Station, to: Station):
 		yield(segment, 'arrived')
 		segment.queue_free()
 		
-func handle_pickups(station:Station, productions: Array):
-	yield(station.dropoff(carrier), 'completed')
+func handle_pickups(step:RouteStep):
+	yield(step.station.dropoff(carrier), 'completed')
 
-	for production in productions.slice(0, carrier.get_remaining_capacity()):
-		yield(carrier.add_cargo(production.produces), 'completed')
+#	for production in productions.slice(0, carrier.get_remaining_capacity()):
+#		yield(carrier.add_cargo(production.produces), 'completed')
 
 func finish():
 	active = false

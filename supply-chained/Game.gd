@@ -23,7 +23,7 @@ func _on_carrier_selected(carrier: Carrier):
 
 func finish_current_route(carrier: Carrier, route: Route):
 	var final_station = yield(carrier.current_route.finish(), "completed")
-	var start_station = route.steps[0][0]
+	var start_station = route.steps[0].station
 	var temp_route = route_builder.get_temporary_route(final_station, start_station)
 	
 	add_child(temp_route)
