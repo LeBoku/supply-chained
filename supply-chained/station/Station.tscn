@@ -2,7 +2,7 @@
 
 [ext_resource path="res://station/Station.gd" type="Script" id=1]
 [ext_resource path="res://img/resource.png" type="Texture" id=2]
-[ext_resource path="res://production/Requirements.tscn" type="PackedScene" id=3]
+[ext_resource path="res://cargo/cargo-list/CargoList.tscn" type="PackedScene" id=3]
 
 [node name="Station" type="Position2D" groups=[
 "Station",

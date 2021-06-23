@@ -5,7 +5,7 @@ signal carrier_selected(Carrier)
 const Util = preload("res://util/Util.gd")
 
 var carrier: Carrier
-onready var materials = $"/root/MaterialHelper"
+onready var cargo_helper = $"/root/CargoHelper"
 
 func initialize(carrier: Carrier):
 	self.carrier = carrier
@@ -28,6 +28,6 @@ func display():
 		var texture = null
 
 		if carrier.cargo[index] != null:
-			texture = materials.get_icon(carrier.cargo[index])
+			texture = cargo_helper.get_icon(carrier.cargo[index])
 			
 		el.get_node("Payload").texture = texture

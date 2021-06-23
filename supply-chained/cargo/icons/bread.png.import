@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wood.png-2fe9bd25041d47bd8a8bdb89a5fa24be.stex"
+path="res://.import/bread.png-42f7a76d845866b56518469621641a74.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://material/icons/wood.png"
-dest_files=[ "res://.import/wood.png-2fe9bd25041d47bd8a8bdb89a5fa24be.stex" ]
+source_file="res://cargo/icons/bread.png"
+dest_files=[ "res://.import/bread.png-42f7a76d845866b56518469621641a74.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/labor.png-d325bc1cd4d0bf5a42f9f0a0985b5eba.stex"
+path="res://.import/coal.png-f4d6652a8b822cc2a597987520bd79fa.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://material/icons/labor.png"
-dest_files=[ "res://.import/labor.png-d325bc1cd4d0bf5a42f9f0a0985b5eba.stex" ]
+source_file="res://cargo/icons/coal.png"
+dest_files=[ "res://.import/coal.png-f4d6652a8b822cc2a597987520bd79fa.stex" ]
 
 [params]
 

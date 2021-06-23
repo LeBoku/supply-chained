@@ -6,7 +6,6 @@ const Util = preload("res://util/Util.gd")
 
 export var carrier_path: NodePath
 onready var carrier: Carrier
-onready var materials = $"/root/MaterialHelper"
 
 func _ready():
 	$Cargo.initialize(carrier)

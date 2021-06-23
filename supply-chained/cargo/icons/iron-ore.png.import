@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coal.png-2218d5dc5a76c6bc3968ea38752789eb.stex"
+path="res://.import/iron-ore.png-44afa803b26fe443c2b74ca4047344c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://material/icons/coal.png"
-dest_files=[ "res://.import/coal.png-2218d5dc5a76c6bc3968ea38752789eb.stex" ]
+source_file="res://cargo/icons/iron-ore.png"
+dest_files=[ "res://.import/iron-ore.png-44afa803b26fe443c2b74ca4047344c5.stex" ]
 
 [params]
 

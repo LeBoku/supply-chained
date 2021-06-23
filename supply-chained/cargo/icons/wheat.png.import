@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/iron-ore.png-a746ab5dc15dbd15f8999e6dfa4a2468.stex"
+path="res://.import/wheat.png-f55d7782aabd7581f0c8bd076bec2d36.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://material/icons/iron-ore.png"
-dest_files=[ "res://.import/iron-ore.png-a746ab5dc15dbd15f8999e6dfa4a2468.stex" ]
+source_file="res://cargo/icons/wheat.png"
+dest_files=[ "res://.import/wheat.png-f55d7782aabd7581f0c8bd076bec2d36.stex" ]
 
 [params]
 

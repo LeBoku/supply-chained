@@ -45,7 +45,7 @@ config/icon="res://icon.png"
 [autoload]
 
 RouteBuilder="*res://route-builder/RouteBuilder.gd"
-MaterialHelper="*res://material/material_helper.gd"
+CargoHelper="*res://cargo/CargoHelper.gd"
 
 [debug]
 

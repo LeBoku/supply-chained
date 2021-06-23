@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://carriers/Hud.gd" type="Script" id=1]
-[ext_resource path="res://material/icons/placeholder.png" type="Texture" id=2]
+[ext_resource path="res://cargo/icons/placeholder.png" type="Texture" id=2]
 [ext_resource path="res://carriers/Cargo.gd" type="Script" id=3]
 [ext_resource path="res://carriers/CurrentRoute.gd" type="Script" id=4]
 
