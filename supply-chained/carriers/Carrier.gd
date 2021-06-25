@@ -31,6 +31,7 @@ func add_cargo(content):
 		
 func remove_cargo(content):
 	cargo[cargo.find(content)] = null
+	yield(get_tree().create_timer(1), "timeout")
 	update_cargo()
 
 func update_cargo():

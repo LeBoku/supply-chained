@@ -15,5 +15,5 @@ light_mask = -2147483647
 scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 2 )
 
-[node name="Requirements" parent="." instance=ExtResource( 3 )]
+[node name="Wants" parent="." instance=ExtResource( 3 )]
 visible = false

@@ -56,11 +56,15 @@ func travel(from: Station, to: Station):
 		yield(segment, 'arrived')
 		segment.queue_free()
 		
-func handle_pickups(step:RouteStep):
-	yield(step.station.dropoff(carrier), 'completed')
+func handle_pickups(step: RouteStep):
+	for exchange in step.exchanges:
+		yield(handle_pickup(step.station, exchange[0], exchange[1], exchange[2]), "completed")
 
-#	for production in productions.slice(0, carrier.get_remaining_capacity()):
-#		yield(carrier.add_cargo(production.produces), 'completed')
+func handle_pickup(station: Station, list, cargo: String, pickup: bool):
+	if pickup:
+		yield(carrier.add_cargo(cargo), "completed")
+	else:
+		yield(carrier.remove_cargo(cargo), "completed")
 
 func finish():
 	active = false

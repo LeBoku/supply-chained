@@ -19,5 +19,5 @@ func initialize_cargo(requires:PoolStringArray):
 	$Box.move_child($Box/Template, $Box.get_child_count())
 
 func _on_sprite_gui_event(event:InputEvent, cargo:String):
-	if event is InputEventMouseButton and event.button_index == 1:
+	if event is InputEventMouseButton and event.button_index == 1 and event.is_pressed():
 		emit_signal("selected", self, cargo)
