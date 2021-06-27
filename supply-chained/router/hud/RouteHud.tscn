@@ -16,25 +16,3 @@ rect_min_size = Vector2( 20, 20 )
 size_flags_vertical = 0
 texture = ExtResource( 2 )
 expand = true
-
-[node name="Station" type="VBoxContainer" parent="."]
-margin_left = 24.0
-margin_right = 81.0
-margin_bottom = 50.0
-
-[node name="Label" type="Label" parent="Station"]
-margin_right = 57.0
-margin_bottom = 14.0
-text = "Station A"
-
-[node name="Label2" type="Label" parent="Station"]
-margin_top = 18.0
-margin_right = 57.0
-margin_bottom = 32.0
-text = "+bread"
-
-[node name="Label3" type="Label" parent="Station"]
-margin_top = 36.0
-margin_right = 57.0
-margin_bottom = 50.0
-text = "- Iron"

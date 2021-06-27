@@ -2,8 +2,9 @@ extends HBoxContainer
 
 const play_icon = preload("res://util/icons/play.png")
 const pause_icon = preload("res://util/icons/pause.png")
-const Util = preload("res://util/Util.gd")
 
+const Util = preload("res://util/Util.gd")
+const RouteStepHud = preload("res://router/hud/RouteStepHud.tscn")
 var carrier: Carrier
 
 func initialize(carrier: Carrier):
@@ -18,17 +19,8 @@ func _on_route_changed():
 
 		if carrier.current_route.repeats:
 			for step in carrier.current_route.steps:
-				if len(step.exchanges) > 0:
-					var label = Label.new()
-					label.text = step.station.name
-					add_child(label)
-								
-					for exchange in step.exchanges:
-						if len(step.exchanges) > 0:
-							var exchange_label = Label.new()
-							exchange_label.text = ('+' if exchange[2] else '-')+ exchange[1]
-							
-							add_child(exchange_label)
+				if len(step.exchanges)>0:
+					add_child(RouteStepHud.instance().initialize(step, $"/root/CargoHelper"))
 
 	else:
 		$State.texture = pause_icon

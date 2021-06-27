@@ -12,6 +12,6 @@ func init(curve, carrier):
 func _process(delta):
 	$Follower.offset += delta * speed
 	
-	if  $Follower.unit_offset >= 1:
+	if $Follower.unit_offset >= 1:
 		emit_signal("arrived")
 
