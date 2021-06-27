@@ -33,4 +33,6 @@ func dropoff(carrier):
 		if carrier.cargo.has(r):
 			carrier.remove_cargo(r)
 			yield(get_tree().create_timer(1), "timeout")
-	
+
+func _on_want_selected(list, cargo):
+	$"/root/RouteBuilder".add_step(self, [list, cargo, false])

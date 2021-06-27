@@ -14,11 +14,19 @@ func _on_route_changed():
 	if carrier.current_route != null:
 		if carrier.current_route.repeats:
 			$State.text = "On route"
+			
 			for step in carrier.current_route.steps:
 				if len(step.exchanges) > 0:
 					var label = Label.new()
 					label.text = step.station.name
 					add_child(label)
+								
+					for exchange in step.exchanges:
+						if len(step.exchanges) > 0:
+							var exchange_label = Label.new()
+							exchange_label.text = ('+' if exchange[2] else '-')+ exchange[1]
+							
+							add_child(exchange_label)
 		else:
 			$State.text = "Rerouting"
 

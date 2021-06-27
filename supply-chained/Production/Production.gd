@@ -8,8 +8,6 @@ func _ready():
 	add_to_group("Production")
 	set_enabled(false)
 	
-#	$Sprite.texture = $"/root/CargoHelper".get_icon(produces)
-	
 	$Connector.visible = true
 	$Connector.add_point(Vector2())
 	$Connector.add_point(-position)

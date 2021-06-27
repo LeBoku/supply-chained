@@ -17,3 +17,5 @@ texture = ExtResource( 2 )
 
 [node name="Wants" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[connection signal="selected" from="Wants" to="." method="_on_want_selected"]
