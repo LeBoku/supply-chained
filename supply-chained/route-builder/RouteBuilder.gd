@@ -21,7 +21,7 @@ func build_route():
 	yield(self, "route_finalized")
 	return Route.instance().init(steps)
 
-func add_step(station: Station, cargo_exchange: Array):
+func add_step(station: Station, cargo_exchange: CargoExchange):
 	if len(steps) == 0 or station != steps[-1].station:
 		var stations = [station] 
 		if len(steps) > 0:
@@ -29,11 +29,11 @@ func add_step(station: Station, cargo_exchange: Array):
 		
 		steps.append_array(get_steps(stations))
 
-	steps[-1].add_exchange(cargo_exchange)
-
-	if len(steps) > 1 and station == steps[0].station:
+	if len(steps) > 1 and station == steps[0].station and cargo_exchange.is_same(steps[0].exchanges[0]):
 		emit_signal("route_finalized")
 		enable_stops(false)
+	else:
+		steps[-1].add_exchange(cargo_exchange)
 
 func enable_stops(enabled: bool):
 	for p in get_tree().get_nodes_in_group('Production'):

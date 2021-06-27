@@ -21,4 +21,4 @@ func set_enabled(enabled):
 #	$Button.disabled = not enabled
 	
 func _on_cargo_selected(list: CargoList, cargo:String, pickup:bool = false):
-	$"/root/RouteBuilder".add_step(get_parent(), [list, cargo, pickup])
+	$"/root/RouteBuilder".add_step(get_parent(), CargoExchange.new().initialize(cargo, pickup))

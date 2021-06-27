@@ -35,4 +35,4 @@ func dropoff(carrier):
 			yield(get_tree().create_timer(1), "timeout")
 
 func _on_want_selected(list, cargo):
-	$"/root/RouteBuilder".add_step(self, [list, cargo, false])
+	$"/root/RouteBuilder".add_step(self, CargoExchange.new().initialize(cargo, false))

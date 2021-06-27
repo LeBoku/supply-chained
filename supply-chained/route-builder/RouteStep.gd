@@ -10,9 +10,9 @@ func initialize(station: Station):
 
 	return self
 
-func add_exchange(exchange: Array):
+func add_exchange(exchange: CargoExchange):
 	exchanges.append(exchange)
 	exchanges.sort_custom(self, "sort_exchanges")
 
-func sort_exchanges(a: Array, b: Array):
-	return not a[2] if a[2] != b[2] else a[1] < b[1]
+func sort_exchanges(a: CargoExchange, b: CargoExchange):
+	return not a.pickup if a.pickup != b.pickup else a.cargo < b.cargo

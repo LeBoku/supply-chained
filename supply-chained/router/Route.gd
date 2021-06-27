@@ -58,13 +58,13 @@ func travel(from: Station, to: Station):
 		
 func handle_pickups(step: RouteStep):
 	for exchange in step.exchanges:
-		yield(handle_pickup(step.station, exchange[0], exchange[1], exchange[2]), "completed")
+		yield(handle_pickup(step.station, exchange), "completed")
 
-func handle_pickup(station: Station, list, cargo: String, pickup: bool):
-	if pickup:
-		yield(carrier.add_cargo(cargo), "completed")
+func handle_pickup(station: Station, exchange: CargoExchange):
+	if exchange.pickup:
+		yield(carrier.add_cargo(exchange.cargo), "completed")
 	else:
-		yield(carrier.remove_cargo(cargo), "completed")
+		yield(carrier.remove_cargo(exchange.cargo), "completed")
 
 func finish():
 	active = false
