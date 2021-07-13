@@ -12,6 +12,7 @@ var repeats = true
 
 var carrier: Carrier
 var active = false
+var editing = false
 
 func init(steps:Array, repeats = true):
 	self.steps = steps
@@ -27,9 +28,9 @@ func add_exchange(step_index:int, exchange: CargoExchange):
 
 	emit_signal("changed")
 
-func add_carrier(carrier: Carrier):
+func add_carrier(carrier: Carrier, clear_temp_route = true):
 	self.carrier = carrier
-	carrier.update_route(self)
+	carrier.update_route(self, clear_temp_route)
 	return self
 
 func start():

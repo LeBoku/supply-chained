@@ -30,5 +30,5 @@ func finish_current_route(carrier: Carrier, route: Route):
 	var temp_route = route_builder.get_temporary_route(final_station, start_station)
 	
 	add_child(temp_route)
-	yield(temp_route.add_carrier(carrier).start(), "completed")
+	yield(temp_route.add_carrier(carrier, false).start(), "completed")
 	temp_route.queue_free()

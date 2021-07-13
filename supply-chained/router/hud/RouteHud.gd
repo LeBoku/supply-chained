@@ -2,6 +2,7 @@ extends HBoxContainer
 
 const play_icon = preload("res://util/icons/play.png")
 const pause_icon = preload("res://util/icons/pause.png")
+const edit_icon = preload("res://util/icons/edit.png")
 
 const Util = preload("res://util/Util.gd")
 const RouteStepHud = preload("res://router/hud/RouteStepHud.tscn")
@@ -17,13 +18,15 @@ func set_route(newRoute: Route):
 	if route != null: 
 		route.connect("changed", self, "display_route")
 		display_route()
-		
 
 func display_route():
 	Util.remove_children(self, [$State])
 	
 	if route != null:
-		$State.texture = play_icon
+		if route.editing:
+			$State.texture = edit_icon
+		else:
+			$State.texture = play_icon
 
 		if route.repeats:
 			for step in route.steps:
@@ -32,6 +35,4 @@ func display_route():
 		else:
 			add_child(RouteStepHud.instance().initialize(route.steps[0], $"/root/CargoHelper"))
 			add_child(RouteStepHud.instance().initialize(route.steps[-1], $"/root/CargoHelper"))
-			
-	else:
-		$State.texture = pause_icon
+

@@ -16,6 +16,7 @@ func get_temporary_route(from_station: Station, to_station: Station):
 func build_route():
 	active = true
 	route = Route.instance()
+	route.editing = true
 	
 	enable_stops(true)
 
@@ -41,10 +42,12 @@ func enable_stops(enabled: bool):
 		production.set_enabled(enabled)
 
 func finish_route():
-	emit_signal("route_finalized")
 	enable_stops(false)
+	route.editing = false
 	route = null
 	active = false
+
+	emit_signal("route_finalized")
 
 func get_stations_between(stationA: Station, stationB: Station, intermediate_stations:Array = []):
 	var connections = stationA.get_connected_stations()

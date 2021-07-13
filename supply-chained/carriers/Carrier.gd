@@ -39,10 +39,12 @@ func remove_cargo(content):
 func update_cargo():
 	emit_signal("cargo_changed")
 	
-func update_route(route):
+func update_route(route, clear_temp_route = true):
 	current_route = route
 	emit_signal("route_changed")
-	update_temp_route(null)
+	
+	if clear_temp_route:
+		update_temp_route(null)
 
 func update_temp_route(route):
 	temp_route = route
