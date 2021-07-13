@@ -5,22 +5,33 @@ const pause_icon = preload("res://util/icons/pause.png")
 
 const Util = preload("res://util/Util.gd")
 const RouteStepHud = preload("res://router/hud/RouteStepHud.tscn")
-var carrier: Carrier
 
-func initialize(carrier: Carrier):
-	self.carrier = carrier
-	carrier.connect("route_changed", self, "_on_route_changed")
+var route: Route
 
-func _on_route_changed():
+func set_route(newRoute: Route):
+	if route != null:
+		route.disconnect("changed", self, "display_route")
+
+	route = newRoute
+
+	if route != null: 
+		route.connect("changed", self, "display_route")
+		display_route()
+		
+
+func display_route():
 	Util.remove_children(self, [$State])
 	
-	if carrier.current_route != null:
+	if route != null:
 		$State.texture = play_icon
 
-		if carrier.current_route.repeats:
-			for step in carrier.current_route.steps:
+		if route.repeats:
+			for step in route.steps:
 				if len(step.exchanges)>0:
 					add_child(RouteStepHud.instance().initialize(step, $"/root/CargoHelper"))
-
+		else:
+			add_child(RouteStepHud.instance().initialize(route.steps[0], $"/root/CargoHelper"))
+			add_child(RouteStepHud.instance().initialize(route.steps[-1], $"/root/CargoHelper"))
+			
 	else:
 		$State.texture = pause_icon

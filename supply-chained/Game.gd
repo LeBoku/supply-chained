@@ -13,7 +13,10 @@ func _ready():
 		$HUD/CarriersHud.add_child(hud)
 
 func _on_carrier_selected(carrier: Carrier):
-	var route = yield(route_builder.build_route(), "completed")
+	var route = route_builder.build_route()
+	carrier.update_temp_route(route)
+	
+	yield(route_builder, "route_finalized")
 	
 	if carrier.current_route != null:
 		yield(self.finish_current_route(carrier, route), "completed")

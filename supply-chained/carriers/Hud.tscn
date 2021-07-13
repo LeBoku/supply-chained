@@ -64,5 +64,15 @@ custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 text = "Name >"
 
 [node name="CurrentRoute" parent="." instance=ExtResource( 4 )]
+visible = false
+margin_top = 28.0
+margin_right = 94.0
+margin_bottom = 48.0
+
+[node name="TempRoute" parent="." instance=ExtResource( 4 )]
+visible = false
+margin_top = 52.0
+margin_right = 94.0
+margin_bottom = 72.0
 
 [connection signal="pressed" from="Cargo/Name" to="." method="_on_Name_pressed"]

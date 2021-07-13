@@ -2,11 +2,12 @@ extends Node2D
 
 class_name Route
 
+signal changed
 signal finished_route(Station)
 
 const RouteSegment = preload("res://router/RouteSegment.tscn")
 
-var steps: Array
+var steps: Array = []
 var repeats = true
 
 var carrier: Carrier
@@ -17,10 +18,18 @@ func init(steps:Array, repeats = true):
 	self.repeats = repeats
 	return self
 	
+func add_steps(steps: Array):
+	self.steps.append_array(steps)
+	emit_signal("changed")
+	
+func add_exchange(step_index:int, exchange: CargoExchange):
+	steps[step_index].add_exchange(exchange)
+
+	emit_signal("changed")
+
 func add_carrier(carrier: Carrier):
 	self.carrier = carrier
-	carrier.current_route = self
-	carrier.update_route()
+	carrier.update_route(self)
 	return self
 
 func start():

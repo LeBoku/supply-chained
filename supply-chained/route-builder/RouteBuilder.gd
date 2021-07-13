@@ -7,7 +7,7 @@ const Step = preload("res://route-builder/RouteStep.gd")
 const Sorter = preload("res://util/Sorter.gd");
 
 var active = false
-var steps = []
+var route: Route = null 
 
 func get_temporary_route(from_station: Station, to_station: Station):
 	var stations = [from_station] + get_stations_between(from_station, to_station) + [to_station]
@@ -15,30 +15,36 @@ func get_temporary_route(from_station: Station, to_station: Station):
 
 func build_route():
 	active = true
-	steps = []
+	route = Route.instance()
+	
 	enable_stops(true)
 
-	yield(self, "route_finalized")
-	return Route.instance().init(steps)
+	return route
 
 func add_step(station: Station, cargo_exchange: CargoExchange):
-	if len(steps) == 0 or station != steps[-1].station:
+	if len(route.steps) == 0 or station != route.steps[-1].station:
 		var stations = [station] 
-		if len(steps) > 0:
-			stations = get_stations_between(steps[-1].station, station) + stations 
+		if len(route.steps) > 0:
+			stations = get_stations_between(route.steps[-1].station, station) + stations 
 		
-		steps.append_array(get_steps(stations))
+		var steps = get_steps(stations)
+		route.add_steps(steps)
 
-	if len(steps) > 1 and station == steps[0].station and cargo_exchange.is_same(steps[0].exchanges[0]):
-		emit_signal("route_finalized")
-		enable_stops(false)
+	if len(route.steps) > 1 and station == route.steps[0].station and cargo_exchange.is_same(route.steps[0].exchanges[0]):
+		finish_route()
 	else:
-		steps[-1].add_exchange(cargo_exchange)
+		route.add_exchange(-1, cargo_exchange)
 
 func enable_stops(enabled: bool):
 	for p in get_tree().get_nodes_in_group('Production'):
 		var production := p as Production
 		production.set_enabled(enabled)
+
+func finish_route():
+	emit_signal("route_finalized")
+	enable_stops(false)
+	route = null
+	active = false
 
 func get_stations_between(stationA: Station, stationB: Station, intermediate_stations:Array = []):
 	var connections = stationA.get_connected_stations()

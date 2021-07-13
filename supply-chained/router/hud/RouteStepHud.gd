@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-func initialize(step: RouteStep, cargo_helper:CargoHelper):
+func initialize(step: RouteStep, cargo_helper: CargoHelper):
 	$Name.text = step.station.name
 
 	for exchange_group in group(step.exchanges):
@@ -17,7 +17,7 @@ func initialize(step: RouteStep, cargo_helper:CargoHelper):
 
 	return self
 
-func group(exchanges:Array):
+func group(exchanges: Array):
 	var unique = {}
 	
 	for exchange in exchanges:

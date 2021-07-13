@@ -4,10 +4,12 @@ class_name Carrier
 
 signal cargo_changed
 signal route_changed
+signal temporary_route_changed
 
 export var cargo: Array = []
 
 var current_route = null
+var temp_route = null
 
 func _ready():
 	emit_signal("cargo_changed")
@@ -37,5 +39,12 @@ func remove_cargo(content):
 func update_cargo():
 	emit_signal("cargo_changed")
 	
-func update_route():
+func update_route(route):
+	current_route = route
 	emit_signal("route_changed")
+	update_temp_route(null)
+
+func update_temp_route(route):
+	temp_route = route
+	emit_signal("temporary_route_changed")
+	
