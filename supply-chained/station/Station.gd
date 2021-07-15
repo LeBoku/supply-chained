@@ -3,6 +3,7 @@ class_name Station
 
 const Util = preload("res://util/Util.gd")
 export var wants = PoolStringArray()
+export var initial_storage = PoolStringArray(["", "", "", ""])
 
 var out_connections = []
 
@@ -10,6 +11,7 @@ onready var route_builder = get_node('/root/RouteBuilder')
 
 func _ready():
 	$Wants.initialize_cargo(wants)
+	$Storage.initialize(initial_storage)
 
 	for production in Util.get_children_with_group(self, "Production"):
 		wants.append_array(production.requires)

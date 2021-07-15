@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://station/Station.gd" type="Script" id=1]
 [ext_resource path="res://img/resource.png" type="Texture" id=2]
 [ext_resource path="res://cargo/cargo-list/CargoList.tscn" type="PackedScene" id=3]
+[ext_resource path="res://station/Storage.gd" type="Script" id=4]
+[ext_resource path="res://cargo/icons/placeholder.png" type="Texture" id=5]
 
 [node name="Station" type="Position2D" groups=[
 "Station",
@@ -17,5 +19,19 @@ texture = ExtResource( 2 )
 
 [node name="Wants" parent="." instance=ExtResource( 3 )]
 visible = false
+
+[node name="Storage" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="Template" type="Line2D" parent="Storage"]
+scale = Vector2( 0.1, 0.1 )
+points = PoolVector2Array( 0, 0, 70, 0 )
+width = 3.0
+default_color = Color( 0.545098, 0.54902, 0.560784, 1 )
+
+[node name="Sprite" type="Sprite" parent="Storage/Template"]
+position = Vector2( 70, 0 )
+scale = Vector2( 0.8, 0.8 )
+texture = ExtResource( 5 )
 
 [connection signal="selected" from="Wants" to="." method="_on_want_selected"]

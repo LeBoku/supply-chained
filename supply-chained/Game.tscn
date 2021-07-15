@@ -71,6 +71,7 @@ points = PoolVector2Array( 121.695, 198.106, 113.454, 190.989, 94, 184.666 )
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 121.96, 197.748 )
 wants = PoolStringArray( "bread", "iron" )
+initial_storage = PoolStringArray( "labor", "labor", "labor", "", "", "" )
 
 [node name="Labor" parent="Map/Town" instance=ExtResource( 8 )]
 position = Vector2( 36.5133, 4.39181 )
