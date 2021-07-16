@@ -41,7 +41,7 @@ func start():
 		var step = steps[step_index] as RouteStep
 		
 		if len(step.exchanges) > 0:
-			yield(handle_pickups(step), 'completed')
+			yield(handle_exchanges(step), 'completed')
 
 		var next_index = step_index + 1
 		if next_index > len(steps) - 1:
@@ -66,16 +66,22 @@ func travel(from: Station, to: Station):
 		yield(segment, 'arrived')
 		segment.queue_free()
 		
-func handle_pickups(step: RouteStep):
+func handle_exchanges(step: RouteStep):
 	for exchange in step.exchanges:
 		yield(handle_pickup(step.station, exchange), "completed")
 
 func handle_pickup(station: Station, exchange: CargoExchange):
-	if exchange.pickup:
+	if exchange.pickup and station.storage.has(exchange.cargo):
+		station.storage.remove(exchange.cargo)
 		yield(carrier.add_cargo(exchange.cargo), "completed")
-	else:
-		yield(carrier.remove_cargo(exchange.cargo), "completed")
 
+	elif not exchange.pickup and carrier.has(exchange.cargo) and station.storage.get_empty_space() != -1 :
+		station.storage.add(exchange.cargo)
+		yield(carrier.remove_cargo(exchange.cargo), "completed")
+	
+	else:
+		yield(get_tree().create_timer(0), "timeout")
+	
 func finish():
 	active = false
 	var current_station = yield(self, "finished_route")

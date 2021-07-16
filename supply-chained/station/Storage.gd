@@ -1,5 +1,9 @@
 extends Node2D
 
+class_name StationStorage
+
+signal changed
+
 var cargo: PoolStringArray
 
 func initialize(initial_storage: PoolStringArray):
@@ -11,6 +15,20 @@ func _process(delta):
 	for child in get_children():
 		child.rotate(delta)
 		child.get_node("Sprite").rotate(-delta)
+
+func has(cargo: String):
+	return Array(self.cargo).has(cargo)
+
+func remove(to_remove: String):
+	cargo[Array(cargo).find(to_remove)] = ""
+	display_cargo()
+
+func get_empty_space():
+	return Array(cargo).find("")
+
+func add(to_add: String):
+	cargo[get_empty_space()] = to_add
+	display_cargo()
 
 func display_cargo():
 	for i in range(len(cargo)):
