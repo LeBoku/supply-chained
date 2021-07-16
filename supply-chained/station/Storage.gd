@@ -19,15 +19,19 @@ func _process(delta):
 func has(cargo: String):
 	return Array(self.cargo).has(cargo)
 
-func remove(to_remove: String):
-	cargo[Array(cargo).find(to_remove)] = ""
-	display_cargo()
-
 func get_empty_space():
 	return Array(cargo).find("")
 
+func remove(to_remove: String):
+	cargo[Array(cargo).find(to_remove)] = ""
+	storage_updated()
+
 func add(to_add: String):
 	cargo[get_empty_space()] = to_add
+	storage_updated()
+
+func storage_updated():
+	emit_signal("changed")
 	display_cargo()
 
 func display_cargo():
@@ -42,10 +46,10 @@ func display_cargo():
 			sprite.texture = $"/root/CargoHelper".get_icon(c)
 
 func init_empty_spaces(count: int):
-	var spacing_angle = 360 / count
+	var spacing_angle = 360.0 / count
 	var current_angle = 0;
 
-	for cargo in range(count):
+	for _i in range(count):
 		var space = $Template.duplicate()
 		space.rotate(deg2rad(current_angle))
 		add_child(space)
@@ -54,3 +58,4 @@ func init_empty_spaces(count: int):
 		current_angle += spacing_angle
 
 	$Template.visible = false
+	

@@ -1,8 +1,13 @@
 extends Node2D
 
 class_name Production
+
 export var requires: PoolStringArray = ["labor"]
 export var produces: PoolStringArray = []
+export var time = 5
+
+var storage: StationStorage
+var is_producing = false
 
 func _ready():
 	add_to_group("Production")
@@ -20,5 +25,33 @@ func set_enabled(enabled):
 #	$Highlighter.set_active(enabled)
 #	$Button.disabled = not enabled
 	
-func _on_cargo_selected(list: CargoList, cargo:String, pickup:bool = false):
+func _on_cargo_selected(cargo: String, pickup: bool = false):
 	$"/root/RouteBuilder".add_step(get_parent(), CargoExchange.new().initialize(cargo, pickup))
+
+func connect_storage(storage: StationStorage):
+	storage.connect("changed", self, "_on_storage_changed")
+	self.storage = storage
+	
+func _on_storage_changed():
+	if not is_producing and has_all_requirements():
+		produce()
+
+func has_all_requirements():
+	for r in requires:
+		if not storage.has(r):
+			return false
+
+	return true
+	
+func produce():
+	is_producing = true
+
+	for r in requires:
+		storage.remove(r)
+	
+	yield(get_tree().create_timer(time), "timeout")
+	
+	for r in produces:
+		storage.add(r)
+		
+	is_producing = false

@@ -15,7 +15,7 @@ func _ready():
 	storage.initialize(initial_storage)
 
 	for production in Util.get_children_with_group(self, "Production"):
-		wants.append_array(production.requires)
+		production.connect_storage(storage)
 
 func get_connected_stations():
 	var stations = []
@@ -29,5 +29,5 @@ func get_connection_to(station:Station):
 		if conn["station"] == station:
 			return conn
 
-func _on_want_selected(list, cargo):
+func _on_want_selected(cargo):
 	$"/root/RouteBuilder".add_step(self, CargoExchange.new().initialize(cargo, false))
