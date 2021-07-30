@@ -71,11 +71,11 @@ func handle_exchanges(step: RouteStep):
 		yield(handle_pickup(step.station, exchange), "completed")
 
 func handle_pickup(station: Station, exchange: CargoExchange):
-	if exchange.pickup and station.storage.has(exchange.cargo):
+	if exchange.pickup and station.storage.has(exchange.cargo) and carrier.get_empty_cargo_spot() != -1:
 		station.storage.remove(exchange.cargo)
 		yield(carrier.add_cargo(exchange.cargo), "completed")
 
-	elif not exchange.pickup and carrier.has(exchange.cargo) and station.storage.get_empty_space() != -1 :
+	elif not exchange.pickup and carrier.has(exchange.cargo) and station.storage.has_empty_space():
 		station.storage.add(exchange.cargo)
 		yield(carrier.remove_cargo(exchange.cargo), "completed")
 	
