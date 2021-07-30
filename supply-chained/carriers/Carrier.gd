@@ -8,8 +8,11 @@ signal temporary_route_changed
 
 export var cargo: Array = []
 
+const Util = preload("res://util/Util.gd")
+
 var current_route = null
 var temp_route = null
+var exchange_time = 1
 
 func _ready():
 	emit_signal("cargo_changed")
@@ -27,7 +30,7 @@ func add_cargo(content):
 	
 	if index != -1:
 		cargo[index] = content
-		yield(get_tree().create_timer(1), "timeout")
+		yield(get_tree().create_timer(exchange_time), "timeout")
 		update_cargo()
 
 func has(content):
@@ -35,7 +38,7 @@ func has(content):
 
 func remove_cargo(content):
 	cargo[cargo.find(content)] = null
-	yield(get_tree().create_timer(1), "timeout")
+	yield(get_tree().create_timer(exchange_time), "timeout")
 	update_cargo()
 
 func update_cargo():

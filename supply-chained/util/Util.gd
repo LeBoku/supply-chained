@@ -1,3 +1,5 @@
+const YieldUtil = preload("res://util/YieldUtil.gd")
+
 static func get_children_with_group(node: Node, group:String):
 	var children = []
 	
@@ -22,9 +24,9 @@ static func get_as_awaitables(nodes: Array, signal_name: String):
 	return awaitables
 
 static func yield_await_first(awaitables: Array):
-	var yielder = load("res://util/YieldUtil.gd").new()
+	var yielder = YieldUtil.new()
 	yield(yielder.race(awaitables), 'completed')
 	
 static func yield_await_all(awaitables: Array):
-	var yielder = load("res://util/YieldUtil.gd").new()
+	var yielder = YieldUtil.new()
 	yield(yielder.all(awaitables), 'completed')

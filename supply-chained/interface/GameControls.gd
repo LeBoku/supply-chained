@@ -1,7 +1,7 @@
 extends HBoxContainer
 
 func set_game_speed(speed: float, button: Button):
-	$"/root/Globals".game_speed = speed
+	Engine.time_scale = speed
 	
 	$Stop.disabled = false
 	$Normal.disabled = false

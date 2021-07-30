@@ -165,7 +165,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameControls" type="HBoxContainer" parent="HUD"]
+[node name="GameSpeedControls" type="HBoxContainer" parent="HUD"]
 margin_left = 850.119
 margin_top = 1.16511
 margin_right = 1022.12
@@ -177,7 +177,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Stop" type="Button" parent="HUD/GameControls"]
+[node name="Stop" type="Button" parent="HUD/GameSpeedControls"]
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
@@ -186,7 +186,7 @@ flat = true
 clip_text = true
 expand_icon = true
 
-[node name="Normal" type="Button" parent="HUD/GameControls"]
+[node name="Normal" type="Button" parent="HUD/GameSpeedControls"]
 margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 40.0
@@ -197,7 +197,7 @@ flat = true
 clip_text = true
 expand_icon = true
 
-[node name="Faster" type="Button" parent="HUD/GameControls"]
+[node name="Faster" type="Button" parent="HUD/GameSpeedControls"]
 margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 40.0
@@ -207,7 +207,7 @@ flat = true
 clip_text = true
 expand_icon = true
 
-[node name="Fastest" type="Button" parent="HUD/GameControls"]
+[node name="Fastest" type="Button" parent="HUD/GameSpeedControls"]
 margin_left = 132.0
 margin_right = 172.0
 margin_bottom = 40.0
@@ -217,7 +217,7 @@ flat = true
 clip_text = true
 expand_icon = true
 
-[connection signal="pressed" from="HUD/GameControls/Stop" to="HUD/GameControls" method="_on_Stop_pressed"]
-[connection signal="pressed" from="HUD/GameControls/Normal" to="HUD/GameControls" method="_on_Normal_pressed"]
-[connection signal="pressed" from="HUD/GameControls/Faster" to="HUD/GameControls" method="_on_Faster_pressed"]
-[connection signal="pressed" from="HUD/GameControls/Fastest" to="HUD/GameControls" method="_on_Fastest_pressed"]
+[connection signal="pressed" from="HUD/GameSpeedControls/Stop" to="HUD/GameSpeedControls" method="_on_Stop_pressed"]
+[connection signal="pressed" from="HUD/GameSpeedControls/Normal" to="HUD/GameSpeedControls" method="_on_Normal_pressed"]
+[connection signal="pressed" from="HUD/GameSpeedControls/Faster" to="HUD/GameSpeedControls" method="_on_Faster_pressed"]
+[connection signal="pressed" from="HUD/GameSpeedControls/Fastest" to="HUD/GameSpeedControls" method="_on_Fastest_pressed"]
