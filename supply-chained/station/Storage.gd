@@ -30,6 +30,9 @@ func add(to_add: String):
 	cargo[get_empty_space()] = to_add
 	storage_updated()
 
+func has_empty_space():
+	return get_empty_space() != -1
+
 func storage_updated():
 	emit_signal("changed")
 	display_cargo()

@@ -9,6 +9,7 @@ var icons = {
 	"bread": preload("res://cargo/icons/bread.png"),
 	"wood": preload("res://cargo/icons/wood.png"),
 	"labor": preload("res://cargo/icons/labor.png"),
+	"labor-exhausted": preload("res://cargo/icons/labor-exhausted.png"),
 }
 
 func get_icon(name:String):

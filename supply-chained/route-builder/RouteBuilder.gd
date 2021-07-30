@@ -24,7 +24,7 @@ func build_route():
 
 func add_step(station: Station, cargo_exchange: CargoExchange):
 	if len(route.steps) == 0 or station != route.steps[-1].station:
-		var stations = [station] 
+		var stations = [station]
 		if len(route.steps) > 0:
 			stations = get_stations_between(route.steps[-1].station, station) + stations 
 		

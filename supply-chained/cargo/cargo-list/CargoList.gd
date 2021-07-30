@@ -5,8 +5,10 @@ signal selected(cargo)
 
 func initialize_cargo(requires:PoolStringArray):
 	visible = len(requires) > 0
-
-	for r in requires:
+	var sorted = Array(requires)
+	sorted.sort()
+	
+	for r in sorted:
 		var icon = $"/root/CargoHelper".get_icon(r)
 		var sprite = $Box/Template.duplicate()
 		sprite.texture = icon

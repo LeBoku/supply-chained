@@ -3,7 +3,7 @@ extends Node2D
 class_name Production
 
 export var requires: PoolStringArray = ["labor"]
-export var produces: PoolStringArray = []
+export var produces: PoolStringArray = ["exhausted-labor"]
 export var time = 5
 
 var storage: StationStorage
@@ -29,8 +29,8 @@ func _on_cargo_selected(cargo: String, pickup: bool = false):
 	$"/root/RouteBuilder".add_step(get_parent(), CargoExchange.new().initialize(cargo, pickup))
 
 func connect_storage(storage: StationStorage):
-	storage.connect("changed", self, "_on_storage_changed")
 	self.storage = storage
+	storage.connect("changed", self, "_on_storage_changed")
 	
 func _on_storage_changed():
 	if not is_producing and has_all_requirements():
@@ -52,6 +52,11 @@ func produce():
 	yield(get_tree().create_timer(time), "timeout")
 	
 	for r in produces:
+		while not storage.has_empty_space():
+			yield(storage, "changed")
+		
 		storage.add(r)
 		
 	is_producing = false
+
+	_on_storage_changed()
