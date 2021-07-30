@@ -70,6 +70,7 @@ config/icon="res://icon.png"
 
 RouteBuilder="*res://route-builder/RouteBuilder.gd"
 CargoHelper="*res://cargo/CargoHelper.gd"
+Globals="*res://Globals.gd"
 
 [debug]
 

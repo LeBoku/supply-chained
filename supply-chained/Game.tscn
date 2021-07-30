@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://connection/ConnectionHelper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
 [ext_resource path="res://carriers/Carrier.gd" type="Script" id=5]
+[ext_resource path="res://util/icons/fastest.png" type="Texture" id=6]
+[ext_resource path="res://util/icons/faster.png" type="Texture" id=7]
 [ext_resource path="res://production/Production.tscn" type="PackedScene" id=8]
+[ext_resource path="res://util/icons/play.png" type="Texture" id=9]
+[ext_resource path="res://util/icons/pause.png" type="Texture" id=10]
+[ext_resource path="res://interface/GameControls.gd" type="Script" id=11]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -159,3 +164,60 @@ margin_bottom = 5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="GameControls" type="HBoxContainer" parent="HUD"]
+margin_left = 850.119
+margin_top = 1.16511
+margin_right = 1022.12
+margin_bottom = 41.1651
+grow_horizontal = 0
+alignment = 2
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Stop" type="Button" parent="HUD/GameControls"]
+margin_right = 40.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+icon = ExtResource( 10 )
+flat = true
+clip_text = true
+expand_icon = true
+
+[node name="Normal" type="Button" parent="HUD/GameControls"]
+margin_left = 44.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+disabled = true
+icon = ExtResource( 9 )
+flat = true
+clip_text = true
+expand_icon = true
+
+[node name="Faster" type="Button" parent="HUD/GameControls"]
+margin_left = 88.0
+margin_right = 128.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+icon = ExtResource( 7 )
+flat = true
+clip_text = true
+expand_icon = true
+
+[node name="Fastest" type="Button" parent="HUD/GameControls"]
+margin_left = 132.0
+margin_right = 172.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 40, 40 )
+icon = ExtResource( 6 )
+flat = true
+clip_text = true
+expand_icon = true
+
+[connection signal="pressed" from="HUD/GameControls/Stop" to="HUD/GameControls" method="_on_Stop_pressed"]
+[connection signal="pressed" from="HUD/GameControls/Normal" to="HUD/GameControls" method="_on_Normal_pressed"]
+[connection signal="pressed" from="HUD/GameControls/Faster" to="HUD/GameControls" method="_on_Faster_pressed"]
+[connection signal="pressed" from="HUD/GameControls/Fastest" to="HUD/GameControls" method="_on_Fastest_pressed"]
