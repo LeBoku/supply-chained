@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://cargo/cargo-list/CargoList.gd"
 }, {
 "base": "Node2D",
+"class": "CargoStorage",
+"language": "GDScript",
+"path": "res://cargo/CargoStorage.gd"
+}, {
+"base": "CargoStorage",
 "class": "Carrier",
 "language": "GDScript",
 "path": "res://carriers/Carrier.gd"
@@ -44,7 +49,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://station/Station.gd"
 }, {
-"base": "Node2D",
+"base": "CargoStorage",
 "class": "StationStorage",
 "language": "GDScript",
 "path": "res://station/Storage.gd"
@@ -52,6 +57,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "CargoExchange": "",
 "CargoList": "",
+"CargoStorage": "",
 "Carrier": "",
 "Production": "",
 "Route": "",

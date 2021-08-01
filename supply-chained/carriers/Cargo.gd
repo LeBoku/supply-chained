@@ -17,15 +17,15 @@ func initialize(carrier: Carrier):
 
 	remove_child($CargoSpace)
 	
-	carrier.connect("cargo_changed", self, "display")
+	carrier.connect("changed", self, "display")
 	display()
 
 func display():
 	for index in range(len(carrier.cargo)):
-		var el = .get_child(index)
+		var el = get_child(index)
 		var texture = null
 
-		if carrier.cargo[index] != null:
+		if carrier.cargo[index] != "":
 			texture = cargo_helper.get_icon(carrier.cargo[index])
 			
 		el.get_node("Payload").texture = texture

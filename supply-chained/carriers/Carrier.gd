@@ -1,12 +1,9 @@
-extends Node2D
+extends CargoStorage
 
 class_name Carrier
 
-signal cargo_changed
 signal route_changed
 signal temporary_route_changed
-
-export var cargo: Array = []
 
 const Util = preload("res://util/Util.gd")
 
@@ -15,34 +12,16 @@ var temp_route = null
 var exchange_time = 1
 
 func _ready():
-	emit_signal("cargo_changed")
+	emit_signal("changed")
 	add_to_group("carrier")
 
-func get_empty_cargo_spot():
-	return cargo.find(null)
-
-func get_remaining_capacity():
-	return len(cargo) - get_empty_cargo_spot()
-
-func add_cargo(content):
-	yield(get_tree().create_timer(0), "timeout")
-	var index = get_empty_cargo_spot()
-	
-	if index != -1:
-		cargo[index] = content
-		yield(get_tree().create_timer(exchange_time), "timeout")
-		update_cargo()
-
-func has(content):
-	return cargo.has(content)
-
-func remove_cargo(content):
-	cargo[cargo.find(content)] = null
+func add(content):
+	.add(content)
 	yield(get_tree().create_timer(exchange_time), "timeout")
-	update_cargo()
 
-func update_cargo():
-	emit_signal("cargo_changed")
+func remove(content):
+	.remove(content)
+	yield(get_tree().create_timer(exchange_time), "timeout")
 	
 func update_route(route, clear_temp_route = true):
 	current_route = route

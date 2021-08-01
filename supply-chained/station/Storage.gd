@@ -1,13 +1,9 @@
-extends Node2D
+extends CargoStorage
 
 class_name StationStorage
 
-signal changed
-
-var cargo: PoolStringArray
-
 func initialize(initial_storage: PoolStringArray):
-	cargo = initial_storage
+	.initialize(initial_storage)
 	init_empty_spaces(len(initial_storage))
 	display_cargo()
 
@@ -16,25 +12,8 @@ func _process(delta):
 		child.rotate(delta)
 		child.get_node("Sprite").rotate(-delta)
 
-func has(cargo: String):
-	return Array(self.cargo).has(cargo)
-
-func get_empty_space():
-	return Array(cargo).find("")
-
-func remove(to_remove: String):
-	cargo[Array(cargo).find(to_remove)] = ""
-	storage_updated()
-
-func add(to_add: String):
-	cargo[get_empty_space()] = to_add
-	storage_updated()
-
-func has_empty_space():
-	return get_empty_space() != -1
-
 func storage_updated():
-	emit_signal("changed")
+	.storage_updated()
 	display_cargo()
 
 func display_cargo():
@@ -61,4 +40,3 @@ func init_empty_spaces(count: int):
 		current_angle += spacing_angle
 
 	$Template.visible = false
-	

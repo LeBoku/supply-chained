@@ -80,7 +80,6 @@ points = PoolVector2Array( 121.695, 198.106, 113.454, 190.989, 94, 184.666 )
 
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
 position = Vector2( 121.96, 197.748 )
-wants = PoolStringArray( "bread", "iron" )
 initial_storage = PoolStringArray( "labor", "labor", "labor", "", "", "" )
 
 [node name="Labor" parent="Map/Town" instance=ExtResource( 8 )]
@@ -134,14 +133,14 @@ z_index = 10
 antialiased = true
 polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
 script = ExtResource( 5 )
-cargo = [ null, null, null, null, null ]
+cargo = PoolStringArray( "", "", "", "", "" )
 
 [node name="Train2" type="Polygon2D" parent="."]
 z_index = 10
 antialiased = true
 polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
 script = ExtResource( 5 )
-cargo = [ null, null, null ]
+cargo = PoolStringArray( "", "", "" )
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 207.721, 200.594 )
