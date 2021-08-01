@@ -13,6 +13,7 @@ var repeats = true
 var carrier: Carrier
 var active = false
 var editing = false
+var exchange_time = 1
 
 func init(steps:Array, repeats = true):
 	self.steps = steps
@@ -71,16 +72,16 @@ func handle_exchanges(step: RouteStep):
 		yield(handle_pickup(step.station, exchange), "completed")
 
 func handle_pickup(station: Station, exchange: CargoExchange):
-	if exchange.pickup and station.storage.has(exchange.cargo) and carrier.has_empty_space():
-		station.storage.remove(exchange.cargo)
-		yield(carrier.add(exchange.cargo), "completed")
-
-	elif not exchange.pickup and carrier.has(exchange.cargo) and station.storage.has_empty_space():
-		station.storage.add(exchange.cargo)
-		yield(carrier.remove(exchange.cargo), "completed")
+	var time = 0
 	
-	else:
-		yield(get_tree().create_timer(0), "timeout")
+	var exchanged = exchange(exchange.cargo, station.storage, carrier) \
+		if exchange.pickup \
+		else exchange(exchange.cargo, carrier, station.storage)
+	
+	if exchanged:
+		time = exchange_time
+
+	yield(get_tree().create_timer(time), "timeout")
 	
 func finish():
 	active = false
@@ -88,3 +89,13 @@ func finish():
 	queue_free()
 	
 	return current_station
+	
+func exchange(cargo:String, from: CargoStorage, to: CargoStorage):
+	if from.has(cargo) and to.has_empty_space():
+		to.add(cargo)
+		from.remove(cargo)
+
+		return true
+	else:
+		return false
+	

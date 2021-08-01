@@ -9,20 +9,11 @@ const Util = preload("res://util/Util.gd")
 
 var current_route = null
 var temp_route = null
-var exchange_time = 1
 
 func _ready():
 	emit_signal("changed")
 	add_to_group("carrier")
 
-func add(content):
-	.add(content)
-	yield(get_tree().create_timer(exchange_time), "timeout")
-
-func remove(content):
-	.remove(content)
-	yield(get_tree().create_timer(exchange_time), "timeout")
-	
 func update_route(route, clear_temp_route = true):
 	current_route = route
 	emit_signal("route_changed")

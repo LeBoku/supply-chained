@@ -18,11 +18,14 @@ func remove(to_remove: String):
 	cargo[Array(cargo).find(to_remove)] = ""
 	storage_updated()
 
-func has_empty_space():
-	return get_empty_space() != -1
+func exchange(cargo: String, other_storage: CargoStorage):
+	pass
 
 func has(cargo: String):
 	return Array(self.cargo).has(cargo)
+	
+func has_empty_space():
+	return get_empty_space() != -1
 
 func get_empty_space():
 	return Array(cargo).find("")
