@@ -12,7 +12,6 @@ func initialize(initial_storage: PoolStringArray):
 	return self
 
 func add(to_add: String):
-	print(get_empty_space())
 	cargo[get_empty_space()] = to_add
 	storage_updated()
 	
@@ -35,6 +34,9 @@ func set_locked(index: int, locked: bool):
 	else:
 		locked_indexes.erase(index)
 
+	locked_indexes.sort()
+	locked_indexes.invert()
+
 func get_unlocked():
 	var unlocked = Array(cargo)
 	
@@ -49,15 +51,14 @@ func find_unlocked(cargo_to_find: String):
 
 	while found == null:
 		found = Array(cargo).find(cargo_to_find, search_from)
-		print(found)
-		print(locked_indexes)
+
 		if locked_indexes.has(found):
 			search_from = found + 1
 			found = null
-		
+
 		if search_from > len(cargo):
 			found = -1
-	
+
 	return found
 
 func storage_updated():
