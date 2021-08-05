@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://carriers/Hud.gd" type="Script" id=1]
 [ext_resource path="res://cargo/icons/placeholder.png" type="Texture" id=2]
 [ext_resource path="res://carriers/Cargo.gd" type="Script" id=3]
 [ext_resource path="res://router/hud/RouteHud.tscn" type="PackedScene" id=4]
+[ext_resource path="res://util/icons/lock.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 1 )
@@ -51,6 +52,19 @@ margin_right = 22.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 20, 20 )
 texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Lock" type="TextureRect" parent="Cargo/CargoSpace"]
+visible = false
+margin_left = 2.0
+margin_top = 1.0
+margin_right = 22.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 20, 20 )
+texture = ExtResource( 5 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
