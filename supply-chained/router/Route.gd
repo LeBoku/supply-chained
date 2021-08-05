@@ -74,9 +74,11 @@ func handle_exchanges(step: RouteStep):
 func handle_pickup(station: Station, exchange: CargoExchange):
 	var time = 0
 	
-	var exchanged = exchange(exchange.cargo, station.storage, carrier) \
-		if exchange.pickup \
-		else exchange(exchange.cargo, carrier, station.storage)
+	var exchanged = false
+	if exchange.pickup:
+		exchanged = exchange(exchange.cargo, station.storage, carrier)
+	else:
+		exchanged = exchange(exchange.cargo, carrier, station.storage)
 	
 	if exchanged:
 		time = exchange_time
