@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
@@ -11,6 +11,30 @@
 [ext_resource path="res://util/icons/play.png" type="Texture" id=9]
 [ext_resource path="res://util/icons/pause.png" type="Texture" id=10]
 [ext_resource path="res://interface/GameControls.gd" type="Script" id=11]
+
+[sub_resource type="InputEventKey" id=1]
+scancode = 32
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventKey" id=3]
+scancode = 49
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="InputEventKey" id=5]
+scancode = 50
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
+
+[sub_resource type="InputEventKey" id=7]
+scancode = 51
+
+[sub_resource type="ShortCut" id=8]
+shortcut = SubResource( 7 )
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -180,6 +204,8 @@ __meta__ = {
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
+hint_tooltip = "Pause"
+shortcut = SubResource( 2 )
 icon = ExtResource( 10 )
 flat = true
 clip_text = true
@@ -190,7 +216,9 @@ margin_left = 44.0
 margin_right = 84.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
+hint_tooltip = "Normal Speed"
 disabled = true
+shortcut = SubResource( 4 )
 icon = ExtResource( 9 )
 flat = true
 clip_text = true
@@ -201,6 +229,8 @@ margin_left = 88.0
 margin_right = 128.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
+hint_tooltip = "Faster Speed"
+shortcut = SubResource( 6 )
 icon = ExtResource( 7 )
 flat = true
 clip_text = true
@@ -211,6 +241,8 @@ margin_left = 132.0
 margin_right = 172.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 40, 40 )
+hint_tooltip = "Fastest Speed"
+shortcut = SubResource( 8 )
 icon = ExtResource( 6 )
 flat = true
 clip_text = true
