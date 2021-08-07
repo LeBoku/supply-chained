@@ -111,6 +111,19 @@ position = Vector2( 36.5133, 4.39181 )
 requires = PoolStringArray( "labor-exhausted", "bread" )
 produces = PoolStringArray( "labor" )
 
+[node name="Rail8" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 104.732, 175.625, 116.916, 183.218, 124.862, 187.632, 121.683, 196.814 )
+
+[node name="Forest" parent="Map" instance=ExtResource( 2 )]
+position = Vector2( 105.185, 174.97 )
+initial_storage = PoolStringArray( "", "", "", "", "", "" )
+
+[node name="Gathering" parent="Map/Forest" instance=ExtResource( 8 )]
+position = Vector2( -28.6437, 0.683695 )
+requires = PoolStringArray( "labor-exhausted" )
+produces = PoolStringArray( "labor" )
+time = 30
+
 [node name="Rail1" parent="Map" instance=ExtResource( 3 )]
 position = Vector2( 0.209976, 0 )
 points = PoolVector2Array( 133.774, 224.663, 109.218, 228.032, 112.665, 237.596, 104.667, 239 )
@@ -167,9 +180,9 @@ script = ExtResource( 5 )
 cargo = PoolStringArray( "", "", "" )
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 207.721, 200.594 )
+position = Vector2( 120, 220 )
 current = true
-zoom = Vector2( 0.5, 0.5 )
+zoom = Vector2( 0.2, 0.2 )
 limit_left = -500
 limit_top = -100
 limit_right = 1500

@@ -10,7 +10,7 @@ const RouteSegment = preload("res://router/RouteSegment.tscn")
 var steps: Array = []
 var repeats = true
 
-var carrier: Carrier
+var carrier: CargoStorage
 var active = false
 var editing = false
 var exchange_time = 1
@@ -29,7 +29,7 @@ func add_exchange(step_index:int, exchange: CargoExchange):
 
 	emit_signal("changed")
 
-func add_carrier(carrier: Carrier, clear_temp_route = true):
+func add_carrier(carrier: CargoStorage, clear_temp_route = true):
 	self.carrier = carrier
 	carrier.update_route(self, clear_temp_route)
 	return self

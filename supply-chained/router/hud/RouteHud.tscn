@@ -3,7 +3,9 @@
 [ext_resource path="res://router/hud/RouteHud.gd" type="Script" id=1]
 [ext_resource path="res://util/icons/pause.png" type="Texture" id=2]
 
-[node name="CurrentRoute" type="HBoxContainer"]
+[node name="Route" type="HBoxContainer"]
+margin_right = 36.0
+margin_bottom = 20.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
