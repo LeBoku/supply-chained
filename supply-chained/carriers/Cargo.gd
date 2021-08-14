@@ -9,7 +9,7 @@ func initialize(carrier: Carrier):
 	self.carrier = carrier
 	$Name.text = carrier.name
 
-	for index in range(len(carrier.cargo)):
+	for index in range(len(carrier.stored_cargo)):
 		var el = $CargoSpace.duplicate() as Panel
 		el.connect("gui_input", self, "_on_CargoSpace_click", [index, el])
 		el.get_node("Payload").texture = null
@@ -22,12 +22,12 @@ func initialize(carrier: Carrier):
 	display()
 
 func display():
-	for index in range(len(carrier.cargo)):
+	for index in range(len(carrier.stored_cargo)):
 		var el = get_child(index)
 		var texture = null
 
-		if carrier.cargo[index] != "":
-			texture = cargo_helper.get_icon(carrier.cargo[index])
+		if carrier.stored_cargo[index] != null:
+			texture = cargo_helper.get_icon(carrier.stored_cargo[index].type)
 			
 		el.get_node("Payload").texture = texture
 

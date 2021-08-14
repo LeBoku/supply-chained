@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://station/Station.gd" type="Script" id=1]
 [ext_resource path="res://img/resource.png" type="Texture" id=2]
-[ext_resource path="res://station/Storage.gd" type="Script" id=4]
-[ext_resource path="res://cargo/icons/placeholder.png" type="Texture" id=5]
+[ext_resource path="res://station/StationStorage.gd" type="Script" id=4]
 
 [node name="Station" type="Position2D" groups=[
 "Station",
@@ -25,7 +24,5 @@ points = PoolVector2Array( 0, 0, 70, 0 )
 width = 3.0
 default_color = Color( 0.545098, 0.54902, 0.560784, 1 )
 
-[node name="Sprite" type="Sprite" parent="Storage/Template"]
+[node name="CargoSpot" type="Position2D" parent="Storage/Template"]
 position = Vector2( 70, 0 )
-scale = Vector2( 0.8, 0.8 )
-texture = ExtResource( 5 )

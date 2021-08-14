@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://cargo/icons/placeholder.png" type="Texture" id=1]
+[ext_resource path="res://cargo/cargo/Cargo.gd" type="Script" id=2]
+
+[node name="Cargo" type="Node2D"]
+scale = Vector2( 0.2, 0.2 )
+script = ExtResource( 2 )
+
+[node name="Icon" type="Sprite" parent="."]
+texture = ExtResource( 1 )

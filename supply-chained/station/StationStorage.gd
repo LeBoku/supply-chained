@@ -4,28 +4,25 @@ class_name StationStorage
 
 func initialize(initial_storage: PoolStringArray):
 	.initialize(initial_storage)
-	init_empty_spaces(len(initial_storage))
+	init_empty_spaces(len(stored_cargo))
 	display_cargo()
-
-func _process(delta):
-	for child in get_children():
-		child.rotate(delta)
-		child.get_node("Sprite").rotate(-delta)
 
 func storage_updated():
 	.storage_updated()
 	display_cargo()
 
 func display_cargo():
-	for i in range(len(cargo)):
+	print()
+	print(get_child_count())
+	for i in range(len(stored_cargo)):
+		print(i)
 		var space = get_child(i)
-		var sprite = space.get_node("Sprite") as Sprite
-		var c = cargo[i]
-
-		space.visible = c != ""
+		var spot = space.get_node("CargoSpot") as Position2D
+		var c = stored_cargo[i] as Cargo
+		space.visible = c != null
 
 		if space.visible:
-			sprite.texture = $"/root/CargoHelper".get_icon(c)
+			c.global_position = spot.global_position
 
 func init_empty_spaces(count: int):
 	var spacing_angle = 360.0 / count
@@ -35,8 +32,8 @@ func init_empty_spaces(count: int):
 		var space = $Template.duplicate()
 		space.rotate(deg2rad(current_angle))
 		add_child(space)
-		move_child(space, 0)
 		
 		current_angle += spacing_angle
-
-	$Template.visible = false
+	
+	move_child($Template, get_child_count())
+	$Template.queue_free()

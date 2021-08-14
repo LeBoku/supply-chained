@@ -76,9 +76,9 @@ func handle_pickup(station: Station, exchange: CargoExchange):
 	
 	var exchanged = false
 	if exchange.pickup:
-		exchanged = exchange(exchange.cargo, station.storage, carrier)
+		exchanged = station.storage.exchange(exchange.cargo, carrier)
 	else:
-		exchanged = exchange(exchange.cargo, carrier, station.storage)
+		exchanged = carrier.exchange(exchange.cargo, station.storage)
 	
 	if exchanged:
 		time = exchange_time
@@ -91,13 +91,3 @@ func finish():
 	queue_free()
 	
 	return current_station
-	
-func exchange(cargo:String, from: CargoStorage, to: CargoStorage):
-	if from.has(cargo) and to.has_empty_space():
-		to.add(cargo)
-		from.remove(cargo)
-
-		return true
-	else:
-		return false
-	

@@ -1,5 +1,9 @@
 extends Node
 
+signal cargo_created(Cargo)
+var existing_cargo = []
+
+const Cargo = preload("res://cargo/cargo/Cargo.tscn")
 var icons = {
 	"placeholder": preload("res://cargo/icons/placeholder.png"),
 	"coal": preload("res://cargo/icons/coal.png"),
@@ -12,5 +16,18 @@ var icons = {
 	"labor-exhausted": preload("res://cargo/icons/labor-exhausted.png"),
 }
 
-func get_icon(name:String):
-	return icons[name] if icons.has(name) else icons["placeholder"]
+func get_icon(type: String):
+	return icons[type] if icons.has(type) else icons["placeholder"]
+
+func create_cargo(type: String):
+	if icons.has(type):
+		return _create_cargo(type)
+	else:
+		return null
+
+func _create_cargo(type: String):
+	var cargo = Cargo.instance().init(type, get_icon(type))
+	existing_cargo.append(cargo)
+
+	emit_signal("cargo_created", cargo)
+	return cargo

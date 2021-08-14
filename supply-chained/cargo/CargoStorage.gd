@@ -4,29 +4,56 @@ class_name CargoStorage
 
 signal changed
 
-export var cargo: PoolStringArray
+export var stored_cargo: Array
 var locked_indexes =  []
+onready var cargo_helper = $"/root/CargoHelper"
 
 func initialize(initial_storage: PoolStringArray):
-	cargo = initial_storage
+	for type in initial_storage:
+		stored_cargo.append(cargo_helper.create_cargo(type))
+
 	return self
 
-func add(to_add: String):
-	cargo[get_empty_space()] = to_add
+func add(to_add: Cargo):
+	stored_cargo[get_empty_space()] = to_add
 	storage_updated()
 	
-func remove(to_remove: String):
-	cargo[find_unlocked(to_remove)] = ""
+func remove(to_remove: Cargo):
+	stored_cargo[stored_cargo.find(to_remove)] = null
 	storage_updated()
 
-func has(cargo: String):
-	return get_unlocked().has(cargo)
+func has(cargo_type: String):
+	return find_unlocked(cargo_type) != -1
 	
 func has_empty_space():
 	return get_empty_space() != -1
 
 func get_empty_space():
-	return find_unlocked("")
+	return find_unlocked(null)
+
+func find_unlocked(cargo_type):
+	for index in range(len(stored_cargo)):
+		if !locked_indexes.has(index) \
+			and (stored_cargo[index] != null and cargo_type != null \
+				and (stored_cargo[index] as Cargo).is_type(cargo_type)) \
+			or (stored_cargo[index] == null and cargo_type == null):
+
+			return index
+
+	return -1
+
+func exchange(cargo_type:String, to: CargoStorage):
+	var exchanged = false
+	if to.has_empty_space():
+		var index = find_unlocked(cargo_type)
+		if index != -1:
+			var c = stored_cargo[index] as Cargo
+			to.add(c)
+			self.remove(c)
+
+		return true
+	
+	return exchanged
 
 func set_locked(index: int, locked: bool):
 	if locked:
@@ -37,30 +64,5 @@ func set_locked(index: int, locked: bool):
 	locked_indexes.sort()
 	locked_indexes.invert()
 
-func get_unlocked():
-	var unlocked = Array(cargo)
-	
-	for index in locked_indexes:
-		unlocked.remove(index)
-	
-	return unlocked
-	
-func find_unlocked(cargo_to_find: String):
-	var found = null
-	var search_from = 0
-
-	while found == null:
-		found = Array(cargo).find(cargo_to_find, search_from)
-
-		if locked_indexes.has(found):
-			search_from = found + 1
-			found = null
-
-		if search_from > len(cargo):
-			found = -1
-
-	return found
-
 func storage_updated():
 	emit_signal("changed")
-

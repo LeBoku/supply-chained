@@ -170,14 +170,14 @@ z_index = 10
 antialiased = true
 polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
 script = ExtResource( 5 )
-cargo = PoolStringArray( "", "", "", "", "" )
+stored_cargo = [ null, null, null ]
 
 [node name="Train2" type="Polygon2D" parent="."]
 z_index = 10
 antialiased = true
 polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
 script = ExtResource( 5 )
-cargo = PoolStringArray( "", "", "" )
+stored_cargo = [ null, null, null, null, null ]
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 120, 220 )
