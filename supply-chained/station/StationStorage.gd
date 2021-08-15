@@ -12,10 +12,7 @@ func storage_updated():
 	display_cargo()
 
 func display_cargo():
-	print()
-	print(get_child_count())
 	for i in range(len(stored_cargo)):
-		print(i)
 		var space = get_child(i)
 		var spot = space.get_node("CargoSpot") as Position2D
 		var c = stored_cargo[i] as Cargo

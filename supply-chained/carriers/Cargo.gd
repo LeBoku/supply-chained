@@ -24,10 +24,8 @@ func initialize(carrier: Carrier):
 func display():
 	for index in range(len(carrier.stored_cargo)):
 		var el = get_child(index)
-		var texture = null
-
-		if carrier.stored_cargo[index] != null:
-			texture = cargo_helper.get_icon(carrier.stored_cargo[index].type)
+		var cargo = carrier.stored_cargo[index]
+		var texture = cargo.texture if cargo != null else null
 			
 		el.get_node("Payload").texture = texture
 

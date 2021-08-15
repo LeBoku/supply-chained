@@ -6,6 +6,8 @@ export var requires: PoolStringArray = ["labor"]
 export var produces: PoolStringArray = ["exhausted-labor"]
 export var time = 5
 
+onready var cargo_helper = $"/root/CargoHelper"
+
 var storage: StationStorage
 var is_producing = false
 
@@ -22,8 +24,6 @@ func _ready():
 
 func set_enabled(enabled):
 	pass
-#	$Highlighter.set_active(enabled)
-#	$Button.disabled = not enabled
 	
 func _on_cargo_selected(cargo: String, pickup: bool = false):
 	$"/root/RouteBuilder".add_step(get_parent(), CargoExchange.new().initialize(cargo, pickup))
@@ -47,15 +47,15 @@ func produce():
 	is_producing = true
 
 	for r in requires:
-		storage.remove(r)
+		storage.remove_type(r)
 	
 	yield(get_tree().create_timer(time), "timeout")
 	
-	for r in produces:
+	for p in produces:
 		while not storage.has_empty_space():
 			yield(storage, "changed")
 		
-		storage.add(r)
+		storage.add(cargo_helper.create_cargo(p))
 		
 	is_producing = false
 

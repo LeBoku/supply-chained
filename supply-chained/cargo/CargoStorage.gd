@@ -18,8 +18,14 @@ func add(to_add: Cargo):
 	stored_cargo[get_empty_space()] = to_add
 	storage_updated()
 	
-func remove(to_remove: Cargo):
-	stored_cargo[stored_cargo.find(to_remove)] = null
+func remove_cargo(to_remove: Cargo):
+	remove_index(stored_cargo.find(to_remove))
+	
+func remove_type(type: String):
+	remove_index(find_unlocked(type))
+	
+func remove_index(index: int):
+	stored_cargo[index] = null
 	storage_updated()
 
 func has(cargo_type: String):
@@ -49,7 +55,7 @@ func exchange(cargo_type:String, to: CargoStorage):
 		if index != -1:
 			var c = stored_cargo[index] as Cargo
 			to.add(c)
-			self.remove(c)
+			remove_cargo(c)
 
 		return true
 	
