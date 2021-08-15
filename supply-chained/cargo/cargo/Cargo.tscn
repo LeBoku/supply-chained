@@ -5,6 +5,7 @@
 
 [node name="Cargo" type="Node2D"]
 scale = Vector2( 0.1, 0.1 )
+z_index = 100
 script = ExtResource( 2 )
 
 [node name="Icon" type="Sprite" parent="."]

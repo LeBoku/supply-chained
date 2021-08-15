@@ -47,7 +47,8 @@ func produce():
 	is_producing = true
 
 	for r in requires:
-		storage.remove_type(r)
+		var removed = storage.remove_type(r)
+		removed.queue_free()
 	
 	yield(get_tree().create_timer(time), "timeout")
 	

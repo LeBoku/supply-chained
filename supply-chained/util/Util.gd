@@ -9,7 +9,7 @@ static func get_children_with_group(node: Node, group:String):
 			
 	return children
 
-static func remove_children(node: Node, exclude: Array):
+static func remove_children(node: Node, exclude: Array = []):
 	for child in node.get_children():
 		if not exclude.has(child):
 			node.remove_child(child)
