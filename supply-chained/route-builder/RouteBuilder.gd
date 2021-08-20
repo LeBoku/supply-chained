@@ -23,6 +23,8 @@ func build_route():
 	return route
 
 func add_step(station: Station, cargo_exchange: CargoExchange):
+	if not active: return
+
 	if len(route.steps) == 0 or station != route.steps[-1].station:
 		var stations = [station]
 		if len(route.steps) > 0:

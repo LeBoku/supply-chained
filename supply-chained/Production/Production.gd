@@ -4,7 +4,7 @@ class_name Production
 
 export var requires: PoolStringArray = ["labor"]
 export var produces: PoolStringArray = ["exhausted-labor"]
-export var time = 5
+export var time = 0
 
 onready var cargo_helper = $"/root/CargoHelper"
 

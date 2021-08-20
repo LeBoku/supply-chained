@@ -1,10 +1,9 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://connection/ConnectionHelper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
-[ext_resource path="res://carriers/Carrier.gd" type="Script" id=5]
 [ext_resource path="res://util/icons/fastest.png" type="Texture" id=6]
 [ext_resource path="res://util/icons/faster.png" type="Texture" id=7]
 [ext_resource path="res://production/Production.tscn" type="PackedScene" id=8]
@@ -75,48 +74,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Rail4" parent="Map" instance=ExtResource( 3 )]
-visible = false
-points = PoolVector2Array( 149.333, 160.666, 133.897, 173.058, 163.333, 183.333, 123.5, 196.667 )
-
-[node name="IronMine" parent="Map" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( 149.667, 158.667 )
-
-[node name="Mine" parent="Map/IronMine" instance=ExtResource( 8 )]
-position = Vector2( 18.7327, 2.29986 )
-produces = PoolStringArray( "iron-ore", "labor-exhausted" )
-
-[node name="Rail3" parent="Map" instance=ExtResource( 3 )]
-visible = false
-points = PoolVector2Array( 149.333, 160.666, 118.333, 167.666, 94, 184.666 )
-
-[node name="CoalMine" parent="Map" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( 94.3333, 184.667 )
-
-[node name="Mine" parent="Map/CoalMine" instance=ExtResource( 8 )]
-position = Vector2( -9.72768, -21.6945 )
-produces = PoolStringArray( "coal", "labor-exhausted" )
-
-[node name="Rail" parent="Map" instance=ExtResource( 3 )]
-visible = false
-points = PoolVector2Array( 121.695, 198.106, 113.454, 190.989, 94, 184.666 )
-
 [node name="Town" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 121.96, 197.748 )
+position = Vector2( 137.96, 149.748 )
 initial_storage = PoolStringArray( "labor", "labor", "labor", "", "", "" )
 
 [node name="Labor" parent="Map/Town" instance=ExtResource( 8 )]
-position = Vector2( 36.5133, 4.39181 )
+position = Vector2( 33.8885, 19.0909 )
 requires = PoolStringArray( "labor-exhausted", "bread" )
 produces = PoolStringArray( "labor" )
 
-[node name="Rail8" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 104.732, 175.625, 116.916, 183.218, 124.862, 187.632, 121.683, 196.814 )
-
 [node name="Forest" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 105.185, 174.97 )
+position = Vector2( 121.185, 126.97 )
 initial_storage = PoolStringArray( "", "", "", "", "", "" )
 
 [node name="Gathering" parent="Map/Forest" instance=ExtResource( 8 )]
@@ -125,59 +93,51 @@ requires = PoolStringArray( "labor-exhausted" )
 produces = PoolStringArray( "labor" )
 time = 30
 
-[node name="Rail1" parent="Map" instance=ExtResource( 3 )]
-position = Vector2( 0.209976, 0 )
-points = PoolVector2Array( 133.774, 224.663, 109.218, 228.032, 112.665, 237.596, 104.667, 239 )
+[node name="Harbor" parent="Map" instance=ExtResource( 2 )]
+position = Vector2( 189.874, 126.087 )
+initial_storage = PoolStringArray( "", "", "", "", "", "" )
 
-[node name="Smelter" parent="Map" instance=ExtResource( 2 )]
-visible = false
-position = Vector2( 133.333, 225.333 )
-
-[node name="Iron" parent="Map/Smelter" instance=ExtResource( 8 )]
-position = Vector2( 17.0588, 11.438 )
-requires = PoolStringArray( "labor", "iron-ore", "coal" )
-produces = PoolStringArray( "iron", "labor-exhausted" )
+[node name="New Labor" parent="Map/Harbor" instance=ExtResource( 8 )]
+position = Vector2( 20.6213, 17.8117 )
+requires = PoolStringArray( "bread", "bread", "bread" )
+produces = PoolStringArray( "labor" )
+time = 30
 
 [node name="Rail6" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 105.54, 238.907, 96.9245, 225.797, 94.3025, 219.055 )
+points = PoolVector2Array( 121.055, 191.105, 108.731, 184.424, 109.176, 169.13 )
 
 [node name="Mill" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 94.0024, 216.343 )
+position = Vector2( 110.002, 168.343 )
 
 [node name="Mill" parent="Map/Mill" instance=ExtResource( 8 )]
 position = Vector2( -20.534, 8.33464 )
 requires = PoolStringArray( "labor", "wheat" )
-produces = PoolStringArray( "bread", "labor-exhausted", "bread" )
+produces = PoolStringArray( "bread", "labor-exhausted", "bread", "bread" )
 
 [node name="Rail5" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 133.444, 225.105, 141.432, 216.556, 147.982, 213.421, 123.167, 199.167 )
+points = PoolVector2Array( 121.838, 190.877, 137.2, 176.397, 137.553, 150.087 )
+
+[node name="Rail8" parent="Map" instance=ExtResource( 3 )]
+points = PoolVector2Array( 188.761, 126.602, 168.278, 149.204, 137.73, 149.381 )
 
 [node name="Farm" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 105.333, 239.667 )
+position = Vector2( 121.333, 191.667 )
 
 [node name="Farm" parent="Map/Farm" instance=ExtResource( 8 )]
 position = Vector2( -2.46592, 16.617 )
 produces = PoolStringArray( "wheat", "labor-exhausted" )
 
-[node name="Rail2" parent="Map" instance=ExtResource( 3 )]
-visible = false
-points = PoolVector2Array( 95.4242, 215.128, 90, 199.666, 92.6667, 184.666 )
-
 [node name="Rail7" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 95.4242, 215.128, 113.333, 213.833, 121.833, 198.167 )
+points = PoolVector2Array( 109.621, 168.239, 127.588, 167.942, 135.606, 151.609 )
 
 [node name="Train1" parent="." instance=ExtResource( 12 )]
 stored_cargo = [ null, null, null ]
 
-[node name="Train2" type="Polygon2D" parent="."]
-z_index = 10
-antialiased = true
-polygon = PoolVector2Array( -6, -3, 5, -3, 7, 0, 5, 3, -6, 3 )
-script = ExtResource( 5 )
+[node name="Train2" parent="." instance=ExtResource( 12 )]
 stored_cargo = [ null, null, null, null, null ]
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 120, 220 )
+position = Vector2( 136, 172 )
 current = true
 zoom = Vector2( 0.2, 0.2 )
 limit_left = -500

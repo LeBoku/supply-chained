@@ -1,8 +1,10 @@
 extends Line2D
 
+onready var game_state = $"/root/GameState"
+
 func _ready():
-	var statA = get_station_at_point(points[0])
-	var statB = get_station_at_point(points[-1])
+	var statA = game_state.get_station_at_point(points[0])
+	var statB = game_state.get_station_at_point(points[-1])
 
 	points[0] = statA.position
 	points[-1] = statB.position
@@ -16,10 +18,3 @@ func _ready():
 
 	statA.out_connections.append({"curve":curve,"station": statB})
 	statB.out_connections.append({"curve":curve_reversed,"station": statA})
-
-func get_station_at_point(point: Vector2, buffer:int = 5):
-	var stations = get_tree().get_nodes_in_group('Station')
-	for s in stations:
-		var station := s as Station
-		if point.distance_to(station.position) <= buffer:
-			return station

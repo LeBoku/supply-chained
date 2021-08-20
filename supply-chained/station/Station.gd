@@ -26,6 +26,3 @@ func get_connection_to(station:Station):
 	for conn in out_connections:
 		if conn["station"] == station:
 			return conn
-
-func _on_want_selected(cargo):
-	$"/root/RouteBuilder".add_step(self, CargoExchange.new().initialize(cargo, false))
