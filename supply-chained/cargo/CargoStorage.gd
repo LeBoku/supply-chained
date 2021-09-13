@@ -31,8 +31,15 @@ func remove_index(index: int):
 
 	return removed
 
-func has(cargo_type: String):
-	return find_unlocked(cargo_type) != -1
+func has(cargo_type: String, amount: int = 1):
+	var search_from = -1
+
+	for a in range(amount):
+		search_from = find_unlocked(cargo_type, search_from + 1)
+		if search_from == -1:
+			return false
+
+	return true
 	
 func has_empty_space():
 	return get_empty_space() != -1
@@ -40,8 +47,8 @@ func has_empty_space():
 func get_empty_space():
 	return find_unlocked(null)
 
-func find_unlocked(cargo_type):
-	for index in range(len(stored_cargo)):
+func find_unlocked(cargo_type, from: int = 0):
+	for index in range(from, len(stored_cargo)):
 		if !locked_indexes.has(index) \
 			and (stored_cargo[index] != null and cargo_type != null \
 				and (stored_cargo[index] as Cargo).is_type(cargo_type)) \

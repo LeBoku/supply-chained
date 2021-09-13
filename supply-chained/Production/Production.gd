@@ -2,6 +2,8 @@ extends Node2D
 
 class_name Production
 
+const Util = preload("res://util/Util.gd")
+
 export var requires: PoolStringArray = ["labor"]
 export var produces: PoolStringArray = ["exhausted-labor"]
 export var time = 0
@@ -10,6 +12,7 @@ onready var cargo_helper = $"/root/CargoHelper"
 
 var storage: StationStorage
 var is_producing = false
+
 
 func _ready():
 	add_to_group("Production")
@@ -37,9 +40,10 @@ func _on_storage_changed():
 		produce()
 
 func has_all_requirements():
-	for r in requires:
-		if not storage.has(r):
-			return false
+	for r_group in Util.group(requires).values():
+		for r in r_group:
+			if not storage.has(r_group[0], len(r_group)):
+				return false
 
 	return true
 	
