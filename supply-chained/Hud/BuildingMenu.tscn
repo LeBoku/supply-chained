@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://buildings/BuildingMenu.gd" type="Script" id=1]
+
+[node name="BuildingMenu" type="Polygon2D"]
+scale = Vector2( 0.2, 0.2 )
+polygon = PoolVector2Array( 1.66672, -36.6669, 17.3865, -41.7031, -0.132141, -0.709381, -15.1982, -42.4038 )
+script = ExtResource( 1 )
+
+[node name="List" type="VBoxContainer" parent="."]
+margin_left = 35.0
+margin_top = -1.52588e-05
+margin_right = 75.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

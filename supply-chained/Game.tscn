@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://connection/ConnectionHelper.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Camera.gd" type="Script" id=4]
 [ext_resource path="res://Hud/HUD.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Hud/BuildingMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://production/Production.tscn" type="PackedScene" id=8]
 [ext_resource path="res://carriers/Train.tscn" type="PackedScene" id=12]
 
@@ -13,6 +14,9 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="BuildingMenu" parent="." instance=ExtResource( 6 )]
+visible = false
 
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
@@ -23,7 +27,7 @@ __meta__ = {
 position = Vector2( -61.4489, 43.438 )
 z_index = -10
 color = Color( 0.698039, 0.878431, 0.407843, 1 )
-polygon = PoolVector2Array( 59.7825, -40.0342, 91.5664, 42.6039, 201.751, 24.593, 204.929, 72.2689, 251.545, 83.923, 282.27, 34.1282, 378, 64, 396, 34, 469.795, 47.9012, 440.13, 96.6365, 501.579, 91.3392, 576.8, 109.35, 678, 58, 639, 92, 661, 92, 672, 75, 695, 61, 690, 111, 559, 166, 607, 200, 553, 263, 434.832, 158.085, 445.427, 229.069, 409.405, 234.367, 356.432, 148.55, 344.778, 287.34, 433, 288, 430.595, 373.156, 504, 410, 556, 558, 403, 599, 110.637, 658.152, -46.1638, 462.151, -65.2341, 229.069 )
+polygon = PoolVector2Array( 59.7825, -40.0342, 91.5664, 42.6039, 201.751, 24.593, 204.929, 72.2689, 251.545, 83.923, 282.27, 34.1282, 378, 64, 396, 34, 469.795, 47.9012, 440.13, 96.6365, 501.579, 91.3392, 576.8, 109.35, 678, 58, 639, 92, 661, 92, 672, 75, 695, 61, 690, 111, 559, 166, 607, 200, 553, 263, 505.853, 218.951, 483.03, 238.781, 409.405, 234.367, 300.817, 287.421, 397.722, 273.203, 433, 288, 430.595, 373.156, 504, 410, 556, 558, 403, 599, 110.637, 658.152, -46.1638, 462.151, -65.2341, 229.069 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -46,62 +50,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Town" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 137.96, 149.748 )
-initial_storage = PoolStringArray( "labor", "labor", "labor", "", "", "" )
-
-[node name="Labor" parent="Map/Town" instance=ExtResource( 8 )]
-position = Vector2( 33.8885, 19.0909 )
-requires = PoolStringArray( "labor-exhausted", "bread" )
-produces = PoolStringArray( "labor" )
-
-[node name="Forest" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 121.185, 126.97 )
-initial_storage = PoolStringArray( "", "", "", "", "", "" )
-
-[node name="Gathering" parent="Map/Forest" instance=ExtResource( 8 )]
-position = Vector2( -28.6437, 0.683695 )
-requires = PoolStringArray( "labor-exhausted" )
-produces = PoolStringArray( "labor" )
-time = 30
-
-[node name="Harbor" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 189.874, 126.087 )
-initial_storage = PoolStringArray( "", "", "", "", "", "" )
-
-[node name="New Labor" parent="Map/Harbor" instance=ExtResource( 8 )]
-position = Vector2( 20.6213, 17.8117 )
-requires = PoolStringArray( "bread", "bread", "bread" )
-produces = PoolStringArray( "labor" )
-time = 30
-
-[node name="Rail6" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 121.055, 191.105, 108.731, 184.424, 109.176, 169.13 )
-
-[node name="Mill" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 110.002, 168.343 )
-
-[node name="Mill" parent="Map/Mill" instance=ExtResource( 8 )]
-position = Vector2( -20.534, 8.33464 )
-requires = PoolStringArray( "labor", "wheat" )
-produces = PoolStringArray( "bread", "labor-exhausted", "bread", "bread" )
-
-[node name="Rail5" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 121.838, 190.877, 137.2, 176.397, 137.553, 150.087 )
-
-[node name="Rail8" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 188.761, 126.602, 168.278, 149.204, 137.73, 149.381 )
-
-[node name="Farm" parent="Map" instance=ExtResource( 2 )]
-position = Vector2( 121.333, 191.667 )
-
-[node name="Farm" parent="Map/Farm" instance=ExtResource( 8 )]
-position = Vector2( -2.46592, 16.617 )
-produces = PoolStringArray( "wheat", "labor-exhausted" )
-
-[node name="Rail7" parent="Map" instance=ExtResource( 3 )]
-points = PoolVector2Array( 109.621, 168.239, 127.588, 167.942, 135.606, 151.609 )
-
 [node name="Train1" parent="." instance=ExtResource( 12 )]
 stored_cargo = [ null, null, null ]
 
@@ -109,7 +57,7 @@ stored_cargo = [ null, null, null ]
 stored_cargo = [ null, null, null, null, null ]
 
 [node name="Camera" type="Camera2D" parent="."]
-position = Vector2( 136, 172 )
+position = Vector2( 367.227, 160.027 )
 current = true
 zoom = Vector2( 0.2, 0.2 )
 limit_left = -500
@@ -120,3 +68,63 @@ limit_smoothed = true
 script = ExtResource( 4 )
 
 [node name="HUD" parent="." instance=ExtResource( 5 )]
+
+[node name="Landing" parent="." instance=ExtResource( 2 )]
+position = Vector2( 381.333, 141.796 )
+initial_storage = PoolStringArray( "labor", "", "", "", "", "" )
+
+[node name="Town" parent="." instance=ExtResource( 2 )]
+position = Vector2( 137.96, 149.748 )
+initial_storage = PoolStringArray( "labor", "labor", "labor", "", "", "" )
+
+[node name="Labor" parent="Town" instance=ExtResource( 8 )]
+position = Vector2( 33.8885, 19.0909 )
+requires = PoolStringArray( "labor-exhausted", "bread" )
+produces = PoolStringArray( "labor" )
+
+[node name="Forest" parent="." instance=ExtResource( 2 )]
+position = Vector2( 121.185, 126.97 )
+initial_storage = PoolStringArray( "", "", "", "", "", "" )
+
+[node name="Gathering" parent="Forest" instance=ExtResource( 8 )]
+position = Vector2( -28.6437, 0.683695 )
+requires = PoolStringArray( "labor-exhausted" )
+produces = PoolStringArray( "labor" )
+time = 30
+
+[node name="Harbor" parent="." instance=ExtResource( 2 )]
+position = Vector2( 189.874, 126.087 )
+initial_storage = PoolStringArray( "", "", "", "", "", "" )
+
+[node name="New Labor" parent="Harbor" instance=ExtResource( 8 )]
+position = Vector2( 20.6213, 17.8117 )
+requires = PoolStringArray( "bread", "bread", "bread" )
+produces = PoolStringArray( "labor" )
+time = 30
+
+[node name="Rail6" parent="." instance=ExtResource( 3 )]
+points = PoolVector2Array( 121.055, 191.105, 108.731, 184.424, 109.176, 169.13 )
+
+[node name="Mill" parent="." instance=ExtResource( 2 )]
+position = Vector2( 110.002, 168.343 )
+
+[node name="Mill" parent="Mill" instance=ExtResource( 8 )]
+position = Vector2( -20.534, 8.33464 )
+requires = PoolStringArray( "labor", "wheat" )
+produces = PoolStringArray( "bread", "labor-exhausted", "bread", "bread" )
+
+[node name="Rail5" parent="." instance=ExtResource( 3 )]
+points = PoolVector2Array( 121.838, 190.877, 137.2, 176.397, 137.553, 150.087 )
+
+[node name="Rail8" parent="." instance=ExtResource( 3 )]
+points = PoolVector2Array( 188.761, 126.602, 168.278, 149.204, 137.73, 149.381 )
+
+[node name="Farm" parent="." instance=ExtResource( 2 )]
+position = Vector2( 121.333, 191.667 )
+
+[node name="Farm" parent="Farm" instance=ExtResource( 8 )]
+position = Vector2( -2.46592, 16.617 )
+produces = PoolStringArray( "wheat", "labor-exhausted" )
+
+[node name="Rail7" parent="." instance=ExtResource( 3 )]
+points = PoolVector2Array( 109.621, 168.239, 127.588, 167.942, 135.606, 151.609 )

@@ -14,10 +14,10 @@ func _ready():
 	$Icon.texture = texture
 
 func _process(delta):
-	if Input.is_action_just_pressed("MouseClick") and mouse_is_over():
+	if Input.is_action_just_pressed("Activate") and mouse_is_over():
 		selected = true;
 	
-	elif Input.is_action_just_released("MouseClick"):
+	elif Input.is_action_just_released("Activate"):
 		if selected:
 			move_to_position(get_global_mouse_position())
 

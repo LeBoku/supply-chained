@@ -3,37 +3,46 @@
 [ext_resource path="res://buildings/icons/building.png" type="Texture" id=1]
 [ext_resource path="res://buildings/available-building/AvailableBuilding.gd" type="Script" id=2]
 
-[node name="AvailableBuilding" type="GridContainer"]
-margin_left = 475.0
-margin_right = 548.0
-margin_bottom = 72.0
-columns = 2
+[node name="AvailableBuilding" type="HBoxContainer"]
+margin_right = 38.0
+margin_bottom = 18.0
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Amount" type="Label" parent="."]
-margin_top = 18.0
-margin_right = 19.0
-margin_bottom = 32.0
-text = "1 x"
-
 [node name="Icon" type="TextureRect" parent="."]
-margin_left = 23.0
-margin_right = 73.0
+margin_right = 50.0
 margin_bottom = 50.0
+rect_min_size = Vector2( 20, 20 )
 texture = ExtResource( 1 )
+stretch_mode = 6
 
-[node name="Spacer" type="Control" parent="."]
-margin_top = 54.0
-margin_right = 19.0
-margin_bottom = 68.0
+[node name="Details" type="VBoxContainer" parent="."]
+margin_left = 54.0
+margin_right = 128.0
+margin_bottom = 50.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Name" type="Label" parent="."]
-margin_left = 23.0
-margin_top = 54.0
-margin_right = 73.0
-margin_bottom = 68.0
+[node name="Name" type="Label" parent="Details"]
+margin_right = 74.0
+margin_bottom = 14.0
 text = "Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Description" type="Label" parent="Details"]
+margin_top = 18.0
+margin_right = 74.0
+margin_bottom = 32.0
+text = "Description"
 align = 1
+max_lines_visible = 3
+
+[connection signal="mouse_entered" from="." to="." method="_mouse_over_changed" binds= [ true ]]
+[connection signal="mouse_exited" from="." to="." method="_mouse_over_changed" binds= [ false ]]
+[connection signal="mouse_entered" from="Details/Description" to="." method="_on_Description_mouse_entered"]
+[connection signal="mouse_exited" from="Details/Description" to="." method="_on_Description_mouse_exited"]

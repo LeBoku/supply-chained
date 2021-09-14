@@ -14,3 +14,6 @@ func get_station_with_cargo(cargo):
 		var station := s as Station
 		if station.storage.stored_cargo.has(cargo):
 			return station
+
+func get_biomes_at_point(point: Vector2):
+	return ["forest"]
