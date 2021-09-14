@@ -4,6 +4,8 @@ class_name Production
 
 const Util = preload("res://util/Util.gd")
 
+signal produced
+
 export var requires: PoolStringArray = ["labor"]
 export var produces: PoolStringArray = ["exhausted-labor"]
 export var time = 0
@@ -12,7 +14,6 @@ onready var cargo_helper = $"/root/CargoHelper"
 
 var storage: StationStorage
 var is_producing = false
-
 
 func _ready():
 	add_to_group("Production")
@@ -24,6 +25,12 @@ func _ready():
 	
 	$Requirements.initialize_cargo(requires)
 	$Produces.initialize_cargo(produces)
+
+func init(time:int, requires:Array, produces:Array):
+	self.time = time
+	self.requires = PoolStringArray(requires)
+	self.produces = PoolStringArray(produces)
+	return self
 
 func set_enabled(enabled):
 	pass
@@ -62,6 +69,7 @@ func produce():
 		
 		storage.add(cargo_helper.create_cargo(p))
 		
+	emit_signal("produced")
 	is_producing = false
 
 	_on_storage_changed()

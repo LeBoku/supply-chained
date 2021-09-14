@@ -13,7 +13,14 @@ func _ready():
 	storage.initialize(initial_storage)
 
 	for production in Util.get_children_with_group(self, "Production"):
-		production.connect_storage(storage)
+		add_production(production)
+
+func add_production(production):
+	if not production.is_inside_tree():
+		add_child(production)
+		production.position = Vector2(15,10)
+
+	production.connect_storage(storage)
 
 func get_connected_stations():
 	var stations = []

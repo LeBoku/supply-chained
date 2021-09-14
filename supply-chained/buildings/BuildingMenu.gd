@@ -1,7 +1,11 @@
 extends Polygon2D
 
+signal created_station(Station)
+
 const Util = preload("res://util/Util.gd")
 const AvailableBuilding = preload("res://buildings/available-building/AvailableBuilding.tscn")
+const Station = preload("res://station/Station.tscn")
+const Production = preload("res://production/Production.tscn")
 
 onready var store =  $"/root/BuildingStore"
 
@@ -38,4 +42,18 @@ func _on_building_selected(building_type):
 	close()
 
 func place_building(type):
-	print(type)
+	var station = Station.instance()
+	station.position = position
+	
+	emit_signal("created_station", station)
+
+	for step in store.get_building_steps(type):
+		var prod = Production.instance().init(step[0], step[1], step[2])
+		station.add_production(prod)
+		yield(prod, "produced")
+		prod.queue_free()
+	
+	for production in store.get_productions(type):
+		var prod = Production.instance().init(production[0], production[1], production[2])
+		station.add_production(prod)
+		

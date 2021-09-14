@@ -39,3 +39,7 @@ func finish_current_route(carrier: Carrier, route: Route):
 	add_child(temp_route)
 	yield(temp_route.add_carrier(carrier, false).start(), "completed")
 	temp_route.queue_free()
+
+
+func _on_BuildingMenu_created_station(station: Station):
+	add_child(station)

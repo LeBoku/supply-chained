@@ -128,3 +128,5 @@ produces = PoolStringArray( "wheat", "labor-exhausted" )
 
 [node name="Rail7" parent="." instance=ExtResource( 3 )]
 points = PoolVector2Array( 109.621, 168.239, 127.588, 167.942, 135.606, 151.609 )
+
+[connection signal="created_station" from="BuildingMenu" to="." method="_on_BuildingMenu_created_station"]
