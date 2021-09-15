@@ -34,7 +34,7 @@ func remove_index(index: int):
 func has(cargo_type: String, amount: int = 1):
 	var search_from = -1
 
-	for a in range(amount):
+	for _i in range(amount):
 		search_from = find_unlocked(cargo_type, search_from + 1)
 		if search_from == -1:
 			return false

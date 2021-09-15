@@ -13,7 +13,7 @@ func _ready():
 	add_to_group("Cargo")
 	$Icon.texture = texture
 
-func _process(delta):
+func _input(_event):
 	if Input.is_action_just_pressed("Activate") and mouse_is_over():
 		selected = true;
 	

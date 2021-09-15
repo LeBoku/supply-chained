@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Game.gd" type="Script" id=1]
 [ext_resource path="res://station/Station.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Camera.gd" type="Script" id=4]
 [ext_resource path="res://Hud/HUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Hud/BuildingMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://map/Biome.tscn" type="PackedScene" id=7]
 [ext_resource path="res://production/Production.tscn" type="PackedScene" id=8]
 [ext_resource path="res://carriers/Train.tscn" type="PackedScene" id=12]
 
@@ -17,20 +18,36 @@ __meta__ = {
 
 [node name="BuildingMenu" parent="." instance=ExtResource( 6 )]
 visible = false
+z_index = 100
+z_as_relative = false
 
 [node name="Map" type="Node2D" parent="."]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Continent" type="Polygon2D" parent="Map"]
-position = Vector2( -61.4489, 43.438 )
-z_index = -10
-color = Color( 0.698039, 0.878431, 0.407843, 1 )
-polygon = PoolVector2Array( 59.7825, -40.0342, 91.5664, 42.6039, 201.751, 24.593, 204.929, 72.2689, 251.545, 83.923, 282.27, 34.1282, 378, 64, 396, 34, 469.795, 47.9012, 440.13, 96.6365, 501.579, 91.3392, 576.8, 109.35, 678, 58, 639, 92, 661, 92, 672, 75, 695, 61, 690, 111, 559, 166, 607, 200, 553, 263, 505.853, 218.951, 483.03, 238.781, 409.405, 234.367, 300.817, 287.421, 397.722, 273.203, 433, 288, 430.595, 373.156, 504, 410, 556, 558, 403, 599, 110.637, 658.152, -46.1638, 462.151, -65.2341, 229.069 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Continent" parent="Map" instance=ExtResource( 7 )]
+polygon = PoolVector2Array( 529.116, 140.895, 517.102, 82.1624, 468.158, 71.0387, 431.923, 115.587, 381.75, 139.973, 406.696, 90.9208, 419.31, 61.2092, 409.499, 61.4895, 380.068, 76.065, 351.137, 39.0025, 274.115, 47.7548, 218.543, 10.9709, 136.228, 11.8608, 117.985, 131.551, 241.235, 202.298, 135.783, 325.993, 135.783, 325.993, 169.599, 398.519, 323.995, 439.899, 262.236, 542.719, 353.133, 622.629, 517.947, 613.639, 441.034, 560.699, 501.965, 458.814, 438.038, 382.9, 438.038, 382.9, 438.038, 382.9, 504.962, 383.898, 563.895, 426.85, 595.859, 422.854, 543.918, 382.9, 504.962, 328.961, 390.092, 316.974, 525.938, 200.106, 597.857, 216.088, 699.742, 187.121, 792.637, 134.181, 798.63, 65.2585, 774.657, 31.2969, 710.729, 64.2596, 631.819, 156.156, 565.893, 132.183 )
+
+[node name="Forest" parent="Map/Continent" instance=ExtResource( 7 )]
+z_index = 1
+z_as_relative = false
+color = Color( 0, 0.39, 0, 1 )
+polygon = PoolVector2Array( 480.134, 89.5193, 506.482, 88.6784, 499.195, 95.6859, 519.656, 121.193, 518.816, 141.655, 520.619, 149.393, 500.877, 213.692, 445.097, 240.6, 251.691, 225.745, 253.373, 155.95, 306.349, 97.9283, 360.727, 84.7543, 391.56, 83.3528, 364.091, 133.807, 368.295, 165.761, 429.4, 143.897, 439.491, 128.761, 452.105, 98.2086, 472.847, 80.5498 )
+kind = 2
+
+[node name="Rocks" parent="Map/Continent" instance=ExtResource( 7 )]
+z_index = 2
+z_as_relative = false
+color = Color( 0.75, 0.75, 0.75, 1 )
+polygon = PoolVector2Array( 550.437, 98.5762, 533.218, 106.556, 519.779, 109.916, 516.419, 122.515, 498.361, 128.814, 498.781, 143.933, 509.7, 153.173, 518.519, 161.572, 534.898, 174.172, 550.857, 148.973, 539.098, 138.894, 548.757, 129.654, 563.877, 122.515, 568.496, 96.8964, 550.017, 114.115 )
+kind = 3
+
+[node name="LonelyMountait" parent="Map/Continent" instance=ExtResource( 7 )]
+z_index = 2
+color = Color( 0.75, 0.75, 0.75, 1 )
+polygon = PoolVector2Array( 765.198, 62.3304, 767.441, 42.1489, 745.577, 57.0047, 736.327, 77.4665, 718.388, 73.5423, 713.343, 86.4361, 713.343, 86.4361, 718.669, 109.14, 730.721, 110.542, 739.971, 122.875, 765.479, 122.875, 778.372, 121.754, 771.365, 109.981, 765.198, 97.0874, 778.372, 101.853, 791.266, 105.216, 790.425, 83.6331, 765.479, 78.5877, 774.448, 64.5728 )
+kind = 3
 
 [node name="Island 1" type="Polygon2D" parent="Map"]
 position = Vector2( 583.764, 19.3806 )

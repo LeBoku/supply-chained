@@ -17,7 +17,7 @@ func _ready():
 	$Details/Description.text = store.get_description(type)
 	$Icon.texture = store.get_icon(type)
 
-func _gui_input(event):
+func _gui_input(_event):
 	if mouse_over and Input.is_action_just_pressed("Activate"):
 		emit_signal("selected", type)
 

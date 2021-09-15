@@ -9,7 +9,7 @@ const Production = preload("res://production/Production.tscn")
 
 onready var store =  $"/root/BuildingStore"
 
-func _input(event):
+func _input(_event):
 	if Input.is_action_just_pressed("OpenBuildingMenu"):
 		open(get_global_mouse_position())
 	if Input.is_action_just_pressed("CloseBuildingMenu"):
@@ -32,10 +32,14 @@ func set_build_options():
 			$List.add_child(building)
 
 func get_buildings_for(biome):
-	if biome == "grassland":
+	if biome == Util.Biomes.grassland:
 		return [store.types.farm]
-	elif biome == "forest":
-		return [store.types.gatheringSpot, store.types.lumberCamp]
+	elif biome == Util.Biomes.forest:
+		return [store.types.foodGathering, store.types.lumberCamp]
+	elif biome == Util.Biomes.rocks:
+		return [store.types.stoneGathering]
+	else:
+		return []
 
 func _on_building_selected(building_type):
 	place_building(building_type)

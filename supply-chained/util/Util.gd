@@ -1,5 +1,8 @@
 const YieldUtil = preload("res://util/YieldUtil.gd")
 
+
+enum Biomes {land, grassland, forest, rocks}
+
 static func get_children_with_group(node: Node, group:String):
 	var children = []
 	

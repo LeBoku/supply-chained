@@ -16,4 +16,10 @@ func get_station_with_cargo(cargo):
 			return station
 
 func get_biomes_at_point(point: Vector2):
-	return ["forest"]
+	var biome_types = []
+	for b in get_tree().get_nodes_in_group("biome"):
+		var biome := b as Biome
+		if Geometry.is_point_in_polygon(point, biome.polygon):
+			biome_types.append(biome.kind)
+			
+	return biome_types
