@@ -9,6 +9,8 @@ var type: String
 var texture: Texture
 var selected = false
 
+var movement_speed = 50 # Distance per second
+
 func _ready():
 	add_to_group("Cargo")
 	$Icon.texture = texture
@@ -53,7 +55,9 @@ func move_to_station(station: Position2D):
 	if current_station:
 		current_station.storage.remove_cargo(self)
 		
-	$MovementTween.interpolate_property(self, "position", position, station.position, 5)
+	var time = (station.position - position).length() / movement_speed
+		
+	$MovementTween.interpolate_property(self, "position", position, station.position, time)
 	$MovementTween.start()
 
 func _on_Movement_completed():
