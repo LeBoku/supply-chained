@@ -13,9 +13,10 @@ func init(type):
 	return self
 
 func _ready():
-	$Details/Name.text = store.get_label(type)
-	$Details/Description.text = store.get_description(type)
-	$Icon.texture = store.get_icon(type)
+	var data = store.get(type)
+	$Details/Name.text = data.label
+	$Details/Description.text = data.description
+	$Icon.texture = data.icon
 
 func _gui_input(_event):
 	if mouse_over and Input.is_action_just_pressed("Activate"):

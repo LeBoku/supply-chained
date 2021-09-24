@@ -1,64 +1,31 @@
 extends Node
 const default_icon = preload("res://buildings/icons/building.png")
 const Enums = preload("res://util/Enums.gd")
+const BuildingData = preload("res://buildings/BuildingData.gd")
 
-func get_description(type):
-	return buildings[type]["description"]
-
-func get_label(type):
-	return buildings[type]["label"]
-
-func get_icon(type):
-	return buildings[type]["icon"]
-
-func get_building_steps(type):
-	return buildings[type]["building-steps"] as Array
-	
-func get_productions(type):
-	return buildings[type]["productions"] as Array
-	
-func get_upgrades(type):
-	return buildings[type]["upgrades"] as Array
+func get(type) -> BuildingData:
+	return buildings[type]
 
 var buildings = {
-	Enums.BuildingTypes.storage:{
-		"label": "Storage",
-		"description": "A place to store things",
-		"building-steps": [],
-		"productions": [],
-		"icon": default_icon,
-		"upgrades": []
-	},
-	Enums.BuildingTypes.farm: {
-		"label": "Farm",
-		"description": "Uses Labor to create Wheat",
-		"building-steps": [[5, ["labor", "wood"], ["labor-exhausted"]]],
-		"productions": [[5, ["labor"], ["wheat", "labor-exhausted"]]],
-		"icon": default_icon,
-		"upgrades": []
-	},
-	Enums.BuildingTypes.foodGathering: {
-		"label": "Gathering Spot",
-		"description": "Allow hungry Workers to search for their own food",
-		"building-steps": [],
-		"productions": [[30, ["labor-exhausted"], ["labor"]]],
-		"icon": default_icon,
-		"upgrades": []
-	},
-	Enums.BuildingTypes.lumberCamp: {
-		"label": "Lumber Camp",
-		"description": "Allows collecting of Wood",
-		"building-steps": [[10, ["labor"], ["labor-exhausted"]]],
-		"productions": [[10, ["labor"], ["wood", "labor-exhausted"]]],
-		"icon": default_icon,
-		"upgrades": []
-	},
-	Enums.BuildingTypes.stoneGathering: {
-		"label": "Stone Gathering",
-		"description": "Allows collecting of Stone",
-		"building-steps": [[10, ["labor"], ["labor-exhausted"]]],
-		"productions": [[10, ["labor"], ["stone", "labor-exhausted"]]],
-		"icon": default_icon,
-		"upgrades": []
-	}
+	Enums.BuildingTypes.storage: BuildingData.new() \
+		.init("Storage", "A place to store things"),
+		
+	Enums.BuildingTypes.farm: BuildingData.new() \
+		.init("Farm", "Uses Labor to create Wheat") \
+		.add_production(5, ["labor"], ["wheat", "labor-exhausted"]) \
+		.add_building_step(5, ["labor", "wood"], ["labor-exhausted"]),
+		
+	Enums.BuildingTypes.foodGathering: BuildingData.new() \
+		.init("Gathering Spot", "Allow hungry Workers to search for their own food") \
+		.add_production(30, ["labor-exhausted"], ["labor"]),
+		
+	Enums.BuildingTypes.lumberCamp: BuildingData.new() \
+		.init("Lumber Camp", "Allows collecting of Wood") \
+		.add_building_step(10, ["labor"], ["labor-exhausted"]) \
+		.add_production(10, ["labor"], ["wood", "labor-exhausted"]),
+
+	Enums.BuildingTypes.stoneGathering: BuildingData.new() \
+		.init("Stone Gathering", "Allows collecting of Stone") \
+		.add_building_step(10, ["labor"], ["labor-exhausted"]) \
+		.add_production(10, ["labor"], ["stone", "labor-exhausted"])
 }

@@ -31,7 +31,7 @@ func set_build_options():
 	var station = game_state.get_station_at_point(position)
 
 	if station != null:
-		options.append_array(store.get_upgrades(station.building_type))
+		options.append_array(store.get(station.building_type).upgrades)
 		position = station.position
 	else:
 		for biome in game_state.get_biomes_at_point(position):
@@ -62,14 +62,15 @@ func place_building(type):
 	station.building_type = type
 	
 	emit_signal("created_station", station)
+	var data = store.get(type)
 
-	for step in store.get_building_steps(type):
+	for step in data.building_steps:
 		var prod = Production.instance().init(step[0], step[1], step[2])
 		station.add_production(prod)
 		yield(prod, "produced")
 		prod.queue_free()
 	
-	for production in store.get_productions(type):
+	for production in data.productions:
 		var prod = Production.instance().init(production[0], production[1], production[2])
 		station.add_production(prod)
 		
