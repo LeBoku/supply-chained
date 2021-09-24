@@ -11,6 +11,9 @@ export var produces: PoolStringArray = ["exhausted-labor"]
 export var time = 0
 
 onready var cargo_helper = $"/root/CargoHelper"
+onready var progress = $Sprite/ProgressBar
+onready var progress_tween = $Sprite/ProgressBar/Tween
+
 
 var storage: StationStorage
 var is_producing = false
@@ -18,7 +21,7 @@ var is_producing = false
 func _ready():
 	add_to_group("Production")
 	set_enabled(false)
-	
+
 	$Connector.visible = true
 	$Connector.add_point(Vector2())
 	$Connector.add_point(-position)
@@ -60,8 +63,12 @@ func produce():
 	for r in requires:
 		var removed = storage.remove_type(r)
 		removed.queue_free()
+
+	start_progress_bar(time)
 	
 	yield(get_tree().create_timer(time), "timeout")
+	
+	progress.visible = false
 	
 	for p in produces:
 		while not storage.has_empty_space():
@@ -73,3 +80,12 @@ func produce():
 	is_producing = false
 
 	_on_storage_changed()
+	
+func start_progress_bar(time: int):
+	progress.value = 0
+	progress.max_value = time
+	progress.visible = true
+	
+	progress_tween.interpolate_property(progress, "value", 0, time, time)
+	progress_tween.start()
+	

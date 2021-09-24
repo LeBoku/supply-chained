@@ -9,7 +9,7 @@ var type: String
 var texture: Texture
 var selected = false
 
-var movement_speed = 50 # Distance per second
+var movement_speed = 25 # Distance per second
 
 func _ready():
 	add_to_group("Cargo")
