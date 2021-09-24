@@ -65,9 +65,7 @@ func produce():
 		removed.queue_free()
 
 	start_progress_bar(time)
-	
 	yield(get_tree().create_timer(time), "timeout")
-	
 	progress.visible = false
 	
 	for p in produces:

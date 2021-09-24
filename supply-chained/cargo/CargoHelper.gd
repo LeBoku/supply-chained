@@ -14,6 +14,8 @@ var icons = {
 	"wood": preload("res://cargo/icons/wood.png"),
 	"labor": preload("res://cargo/icons/labor.png"),
 	"labor-exhausted": preload("res://cargo/icons/labor-exhausted.png"),
+	"stone": preload("res://cargo/icons/stone.png"),
+	"ash": preload("res://cargo/icons/ash.png")
 }
 
 func get_icon(type: String):

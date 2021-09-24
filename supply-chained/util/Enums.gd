@@ -1,2 +1,2 @@
 enum Biomes { land, grassland, forest, rocks }
-enum BuildingTypes { storage, farm, foodGathering, lumberCamp, stoneGathering }
+enum BuildingTypes { storage, furnance, farm, foodGathering, lumberCamp, stoneGathering }

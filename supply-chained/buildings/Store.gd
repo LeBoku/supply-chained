@@ -12,9 +12,14 @@ var buildings = {
 		
 	Enums.BuildingTypes.farm: BuildingData.new() \
 		.init("Farm", "Uses Labor to create Wheat") \
-		.add_production(5, ["labor"], ["wheat", "labor-exhausted"]) \
-		.add_building_step(5, ["labor", "wood"], ["labor-exhausted"]),
+		.add_building_step(5, ["labor", "wood"], ["labor-exhausted"]) \
+		.add_production(5, ["labor"], ["wheat", "labor-exhausted"]),
 		
+	Enums.BuildingTypes.furnance: BuildingData.new() \
+		.init("Furnance", "Burn things") \
+		.add_building_step(10, ["stone", "labor"], ["labor-exhausted"]) \
+		.add_production(10, ["wood", "wheat"], ["bread", "ash"]),
+
 	Enums.BuildingTypes.foodGathering: BuildingData.new() \
 		.init("Gathering Spot", "Allow hungry Workers to search for their own food") \
 		.add_production(30, ["labor-exhausted"], ["labor"]),

@@ -49,6 +49,8 @@ func get_buildings_for(biome):
 		return [Enums.BuildingTypes.foodGathering, Enums.BuildingTypes.lumberCamp]
 	elif biome == Enums.Biomes.rocks:
 		return [Enums.BuildingTypes.stoneGathering]
+	elif biome == Enums.Biomes.land:
+		return [Enums.BuildingTypes.furnance]
 	else:
 		return []
 

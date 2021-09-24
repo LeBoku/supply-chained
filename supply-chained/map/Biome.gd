@@ -10,8 +10,8 @@ export(Enums.Biomes) var kind setget set_kind
 
 var biome_config = {
 	Enums.Biomes.land: [Color.yellowgreen, -10],
-	Enums.Biomes.grassland: [Color.greenyellow, 0],
-	Enums.Biomes.forest: [Color.darkgreen, 1],
+	Enums.Biomes.forest: [Color.darkgreen, 0],
+	Enums.Biomes.grassland: [Color.greenyellow, 1],
 	Enums.Biomes.rocks: [Color.gray, 2],
 }
 
