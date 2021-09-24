@@ -1,8 +1,12 @@
 extends Position2D
 class_name Station
 
+onready var store =  $"/root/BuildingStore"
+
 const Util = preload("res://util/Util.gd")
+const Enums = preload("res://util/Enums.gd")
 export var initial_storage = PoolStringArray(["", "", "", ""])
+export(Enums.BuildingTypes) var building_type = Enums.BuildingTypes.none
 
 var out_connections = []
 

@@ -4,14 +4,15 @@ extends Polygon2D
 class_name Biome
 
 const Util = preload("res://util/Util.gd")
+const Enums = preload("res://util/Enums.gd")
 
-export(Util.Biomes) var kind setget set_kind
+export(Enums.Biomes) var kind setget set_kind
 
 var biome_config = {
-	Util.Biomes.land: [Color.yellowgreen, -10],
-	Util.Biomes.grassland: [Color.greenyellow, 0],
-	Util.Biomes.forest: [Color.darkgreen, 1],
-	Util.Biomes.rocks: [Color.gray, 2],
+	Enums.Biomes.land: [Color.yellowgreen, -10],
+	Enums.Biomes.grassland: [Color.greenyellow, 0],
+	Enums.Biomes.forest: [Color.darkgreen, 1],
+	Enums.Biomes.rocks: [Color.gray, 2],
 }
 
 func _ready():

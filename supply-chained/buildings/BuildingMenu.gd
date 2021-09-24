@@ -3,11 +3,13 @@ extends Polygon2D
 signal created_station(Station)
 
 const Util = preload("res://util/Util.gd")
+const Enums = preload("res://util/Enums.gd")
 const AvailableBuilding = preload("res://buildings/available-building/AvailableBuilding.tscn")
 const Station = preload("res://station/Station.tscn")
 const Production = preload("res://production/Production.tscn")
 
 onready var store =  $"/root/BuildingStore"
+onready var game_state =  $"/root/GameState"
 
 func _input(_event):
 	if Input.is_action_just_pressed("OpenBuildingMenu"):
@@ -25,19 +27,28 @@ func close():
 
 func set_build_options():
 	Util.remove_children($List)
-	for biome in $"/root/GameState".get_biomes_at_point(position):
-		for building_type in get_buildings_for(biome):
-			var building = AvailableBuilding.instance().init(building_type)
-			building.connect("selected", self, "_on_building_selected")
-			$List.add_child(building)
+	var options = []
+	var station = game_state.get_station_at_point(position)
+
+	if station != null:
+		options.append_array(store.get_upgrades(station.building_type))
+		position = station.position
+	else:
+		for biome in game_state.get_biomes_at_point(position):
+			options.append_array(get_buildings_for(biome))
+
+	for option in options:
+		var building = AvailableBuilding.instance().init(option)
+		building.connect("selected", self, "_on_building_selected")
+		$List.add_child(building)
 
 func get_buildings_for(biome):
-	if biome == Util.Biomes.grassland:
-		return [store.types.farm]
-	elif biome == Util.Biomes.forest:
-		return [store.types.foodGathering, store.types.lumberCamp]
-	elif biome == Util.Biomes.rocks:
-		return [store.types.stoneGathering]
+	if biome == Enums.Biomes.grassland:
+		return [Enums.BuildingTypes.farm]
+	elif biome == Enums.Biomes.forest:
+		return [Enums.BuildingTypes.foodGathering, Enums.BuildingTypes.lumberCamp]
+	elif biome == Enums.Biomes.rocks:
+		return [Enums.BuildingTypes.stoneGathering]
 	else:
 		return []
 
@@ -48,6 +59,7 @@ func _on_building_selected(building_type):
 func place_building(type):
 	var station = Station.instance()
 	station.position = position
+	station.building_type = type
 	
 	emit_signal("created_station", station)
 
